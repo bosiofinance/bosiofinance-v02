@@ -16,7 +16,7 @@ const LandingHeader = () => {
 
   return (
     <motion.header 
-      className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b w-full"
+      className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b shadow-sm w-full"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -28,17 +28,17 @@ const LandingHeader = () => {
             alt="Bosio Finance - Assessoria de Investimentos"
             className="h-12 w-12 object-contain rounded-full shadow-sm"
           />
-          <span className="text-xl font-bold text-[#1A1A1A]">{companyName}</span>
+          <span className="text-xl font-bold text-gray-900">{companyName}</span>
         </div>
         
         <div className="flex items-center space-x-2 md:space-x-4">
-          <Button variant="ghost" className="hover:text-[#FFD600] hover:bg-[#FFD600]/10" asChild>
+          <Button variant="ghost" className="hover:text-[#FFD600] hover:bg-[#FFD600]/10 text-gray-700 font-medium" asChild>
             <Link to="/login">Entrar</Link>
           </Button>
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold"
+            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black border-none font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
             size="sm"
           >
             Estou pronto para economizar
@@ -46,7 +46,7 @@ const LandingHeader = () => {
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="inline-flex sm:hidden bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold"
+            className="inline-flex sm:hidden bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black border-none font-bold shadow-lg"
             size="sm"
           >
             Economizar
