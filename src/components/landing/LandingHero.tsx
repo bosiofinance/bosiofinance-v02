@@ -25,19 +25,19 @@ const LandingHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#1a1a1a] leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black leading-tight">
             Você ainda não sabe para onde vai seu dinheiro?
           </h1>
 
-          <p className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto text-[#666] font-light leading-relaxed">
+          <p className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto text-[#414042] font-light leading-relaxed">
             Pare de se perder nas planilhas. Com o{' '}
-            <strong className="text-[#0057FF] font-semibold">{companyName}</strong>, você organiza, define metas e acompanha seu progresso sem complicação.
+            <strong className="text-black font-bold">{companyName}</strong>, você organiza, define metas e acompanha seu progresso sem complicação.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button
               size="lg"
-              className="bg-[#0057FF] hover:bg-[#0046CC] text-white font-semibold px-8 py-4 text-lg rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="bg-[#FFD600] hover:bg-[#E6C200] text-black font-bold px-8 py-4 text-lg rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
               onClick={scrollToPlans}
             >
               Quero começar agora mesmo
@@ -45,7 +45,7 @@ const LandingHero = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-[#0057FF] text-[#0057FF] hover:bg-[#0057FF] hover:text-white font-semibold px-8 py-4 text-lg rounded-lg transition-all duration-300"
+              className="border-2 border-black text-black hover:bg-black hover:text-white font-semibold px-8 py-4 text-lg rounded-lg transition-all duration-300"
               asChild
             >
               <Link to="/login">Já tenho conta</Link>
@@ -53,10 +53,10 @@ const LandingHero = () => {
           </div>
 
           {/* Badge de Confiança */}
-          <div className="inline-flex items-center gap-2 bg-[#f8faff] px-4 py-2 rounded-full border border-[#e1e8ff]">
-            <ShieldCheckIcon className="w-5 h-5 text-[#0057FF]" />
-            <span className="text-sm text-[#666] font-medium">
-              Criado por <strong className="text-[#0057FF]">Jhony Bosio</strong>, Assessor XP Investimentos
+          <div className="inline-flex items-center gap-2 bg-[#F6F6F6] px-4 py-2 rounded-full border border-gray-200">
+            <ShieldCheckIcon className="w-5 h-5 text-black" />
+            <span className="text-sm text-[#414042] font-medium">
+              Criado por <strong className="text-black">Jhony Bosio</strong>, Assessor XP Investimentos
             </span>
           </div>
         </motion.div>
@@ -68,32 +68,32 @@ const LandingHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="bg-white p-8 rounded-2xl border border-[#e1e8ff] shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <div className="w-14 h-14 bg-[#0057FF] rounded-2xl flex items-center justify-center mb-6">
+          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
+            <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center mb-6">
               <ChartBarIcon className="w-7 h-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-[#1a1a1a]">Domine seus gastos</h3>
-            <p className="text-[#666] leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-black">Domine seus gastos</h3>
+            <p className="text-[#414042] leading-relaxed">
               Veja exatamente para onde seu dinheiro vai com dashboards claros e categorização inteligente.
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-[#e1e8ff] shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <div className="w-14 h-14 bg-[#00C851] rounded-2xl flex items-center justify-center mb-6">
-              <ShieldCheckIcon className="w-7 h-7 text-white" />
+          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
+            <div className="w-14 h-14 bg-[#FFD600] rounded-2xl flex items-center justify-center mb-6">
+              <ShieldCheckIcon className="w-7 h-7 text-black" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-[#1a1a1a]">Privacidade blindada</h3>
-            <p className="text-[#666] leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-black">Privacidade blindada</h3>
+            <p className="text-[#414042] leading-relaxed">
               Seus dados 100% criptografados e protegidos com a mesma segurança utilizada por grandes bancos.
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-[#e1e8ff] shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <div className="w-14 h-14 bg-[#FF6B35] rounded-2xl flex items-center justify-center mb-6">
+          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
+            <div className="w-14 h-14 bg-[#414042] rounded-2xl flex items-center justify-center mb-6">
               <DevicePhoneMobileIcon className="w-7 h-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-[#1a1a1a]">Use onde quiser</h3>
-            <p className="text-[#666] leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-black">Use onde quiser</h3>
+            <p className="text-[#414042] leading-relaxed">
               Acesse do celular, tablet ou computador. Sincronização automática em todos os dispositivos.
             </p>
           </div>
