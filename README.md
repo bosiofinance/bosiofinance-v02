@@ -263,3 +263,4 @@ Desenvolvido com ❤️ usando as melhores tecnologias open source disponíveis.
 ---
 
 **Nota**: Este projeto foi desenvolvido para ser facilmente redistribuível. Sinta-se livre para personalizá-lo e adaptá-lo às suas necessidades!
+<!-- Deploy refresh -->
