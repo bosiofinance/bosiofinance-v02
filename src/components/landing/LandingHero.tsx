@@ -56,7 +56,7 @@ const LandingHero = () => {
           <div className="inline-flex items-center gap-2 bg-[#F6F6F6] px-4 py-2 rounded-full border border-gray-200">
             <ShieldCheckIcon className="w-5 h-5 text-black" />
             <span className="text-sm text-[#414042] font-medium">
-              Criado por <strong className="text-black">Jhony Bosio</strong>, Assessor XP Investimentos
+              Criado por <strong className="text-black">Jhony Bosio</strong>, Assessor de Investimentos
             </span>
           </div>
         </motion.div>
