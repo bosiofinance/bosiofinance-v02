@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import LandingHero from '@/components/landing/LandingHero';
 import LandingFeatures from '@/components/landing/LandingFeatures';
 import LandingPricing from '@/components/landing/LandingPricing';
@@ -97,37 +98,44 @@ const LandingPage = () => {
       </motion.main>
       
       {/* Footer */}
-      <footer className="bg-[#1a1a1a] text-white py-12">
+      <footer className="bg-black text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-1 md:col-span-2">
-              <h3 className="text-xl font-bold mb-4 text-[#0057FF]">{companyName}</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#FFD600]">{companyName}</h3>
               <p className="text-gray-300 leading-relaxed max-w-md">
                 A ferramenta completa para organizar suas finanças, criada por Jhony Bosio, 
-                Assessor de Investimentos certificado.
+                Assessor de Investimentos certificado na XP.
               </p>
+              <div className="mt-6">
+                <p className="text-sm text-gray-400">
+                  🚀 Futuro: Integração Open Finance via Pluggy AI<br/>
+                  🛡️ Tecnologia bancária de segurança<br/>
+                  📱 Multiplataforma (Web, iOS, Android)
+                </p>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Produto</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>Funcionalidades</li>
-                <li>Planos</li>
-                <li>Segurança</li>
-                <li>Suporte</li>
+                <li><Link to="/funcionalidades" className="hover:text-[#FFD600] transition-colors">Funcionalidades</Link></li>
+                <li><a href="/#planos" className="hover:text-[#FFD600] transition-colors">Planos</a></li>
+                <li><a href="/#faq" className="hover:text-[#FFD600] transition-colors">Segurança</a></li>
+                <li><Link to="/contato" className="hover:text-[#FFD600] transition-colors">Suporte</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Empresa</h4>
               <ul className="space-y-2 text-gray-300">
-                <li>Sobre</li>
-                <li>Contato</li>
-                <li>Termos de Uso</li>
-                <li>Privacidade</li>
+                <li><Link to="/sobre" className="hover:text-[#FFD600] transition-colors">Sobre</Link></li>
+                <li><Link to="/contato" className="hover:text-[#FFD600] transition-colors">Contato</Link></li>
+                <li><Link to="/termos" className="hover:text-[#FFD600] transition-colors">Termos de Uso</Link></li>
+                <li><Link to="/privacidade" className="hover:text-[#FFD600] transition-colors">Privacidade</Link></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 {companyName} - Transforme sua vida financeira</p>
+            <p>&copy; 2025 {companyName} - Transforme sua vida financeira | Desenvolvido com 💛 por Jhony Bosio</p>
           </div>
         </div>
       </footer>
