@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { BarChart3, Target, Calendar, PieChart, Wallet, TrendingUp } from 'lucide-react';
+import { BarChart3, Target, Calendar, PieChart, Wallet, Bot, TrendingUp, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const LandingFeatures = () => {
@@ -9,37 +8,37 @@ const LandingFeatures = () => {
     {
       icon: Wallet,
       title: "Controle de Transações",
-      description: "Registre receitas e despesas de forma rápida e organizada"
+      description: "Registre receitas e despesas de forma rápida e organizada com categorização automática"
+    },
+    {
+      icon: Bot,
+      title: "Assistente IA via WhatsApp",
+      description: "Interaja com sua conta financeira através do WhatsApp usando inteligência artificial"
+    },
+    {
+      icon: BarChart3,
+      title: "Relatórios Automatizados",
+      description: "Visualize seus dados com gráficos intuitivos e relatórios completos gerados automaticamente"
     },
     {
       icon: Target,
       title: "Metas Financeiras",
-      description: "Defina objetivos e acompanhe seu progresso em tempo real"
-    },
-    {
-      icon: BarChart3,
-      title: "Relatórios Detalhados",
-      description: "Visualize seus dados com gráficos intuitivos e relatórios completos"
-    },
-    {
-      icon: Calendar,
-      title: "Agendamento",
-      description: "Programe pagamentos recorrentes e nunca esqueça uma conta"
-    },
-    {
-      icon: PieChart,
-      title: "Análise por Categoria",
-      description: "Entenda onde seu dinheiro está sendo gasto"
+      description: "Defina objetivos e acompanhe seu progresso em tempo real com alertas inteligentes"
     },
     {
       icon: TrendingUp,
       title: "Dashboard Inteligente",
-      description: "Visão geral completa da sua situação financeira"
+      description: "Painel principal com métricas e insights que ajudam na tomada de decisões"
+    },
+    {
+      icon: Smartphone,
+      title: "Sistema de Assinaturas",
+      description: "Controle automático de assinaturas recorrentes com integração completa de pagamentos"
     }
   ];
 
   return (
-    <section className="py-20 bg-muted/30 w-full">
+    <section className="py-20 bg-gradient-to-b from-white to-gray-50 w-full">
       <div className="w-full px-4">
         <motion.div
           className="text-center mb-16"
@@ -48,11 +47,12 @@ const LandingFeatures = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Tudo que você precisa para organizar suas finanças
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ferramentas poderosas e intuitivas para transformar a maneira como você lida com o dinheiro
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Ferramentas poderosas e intuitivas baseadas na plataforma PoupeJá, 
+            desenvolvidas para transformar sua vida financeira
           </p>
         </motion.div>
         
@@ -71,11 +71,13 @@ const LandingFeatures = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+              <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm hover:bg-white group">
                 <CardContent className="p-6 text-center">
-                  <feature.icon className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <div className="bg-gradient-to-br from-[#FFD600] to-[#FFC107] p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="h-12 w-12 text-black mx-auto" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
