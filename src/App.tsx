@@ -50,6 +50,14 @@ function App() {
                   <SupabaseInitializer>
                     <BrowserRouter>
                       <Routes>
+                        <Route path="/funcionalidades" element={<Funcionalidades />} />
+<Route path="/sobre" element={<Sobre />} />
+<Route path="/planos" element={<LandingPage />} />
+<Route path="/seguranca" element={<LandingPage />} />
+<Route path="/suporte" element={<LandingPage />} />
+<Route path="/contato" element={<LandingPage />} />
+<Route path="/termos" element={<LandingPage />} />
+<Route path="/privacidade" element={<LandingPage />} />                        
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/dashboard" element={<Index />} />
                         <Route path="/landing" element={<LandingPage />} />
