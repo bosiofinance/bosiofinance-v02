@@ -1,66 +1,53 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, Star, Loader2 } from 'lucide-react';
+import { Check, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { usePlanConfig } from '@/hooks/usePlanConfig';
 
 const LandingPricing = () => {
-  const { config, isLoading, error } = usePlanConfig();
-
-  if (isLoading) {
-    return (
-      <section className="py-20 w-full" id="planos">
-        <div className="w-full px-4">
-          <div className="flex items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin" />
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error || !config) {
-    return (
-      <section className="py-20 w-full" id="planos">
-        <div className="w-full px-4">
-          <div className="text-center text-red-600">
-            Erro ao carregar configurações dos planos
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   const plans = [{
     name: "Mensal",
-    price: config.prices.monthly.displayPrice,
+    price: "R$ 19,90",
     period: "/mês",
     description: "Para uso pessoal completo",
-    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos", "Suporte prioritário"],
-    limitations: [],
+    features: [
+      "Movimentos ilimitados",
+      "Dashboard completo", 
+      "Todos os relatórios",
+      "Metas ilimitadas",
+      "Agendamentos automáticos",
+      "Suporte por email",
+      "Categorização automática",
+      "Exportação de dados"
+    ],
     buttonText: "Assinar Agora",
-    buttonVariant: "default" as const,
     popular: false,
-    linkTo: `/register?priceId=${config.prices.monthly.priceId}&planType=monthly`
+    linkTo: "/register?plan=monthly"
   }, {
     name: "Anual",
-    price: config.prices.annual.displayPrice,
+    price: "R$ 199,00",
     period: "/ano",
-    originalPrice: config.prices.annual.displayOriginalPrice,
-    savings: config.prices.annual.displaySavings,
+    originalPrice: "R$ 238,80",
+    savings: "Economize R$ 39,80 (17%)",
     description: "Melhor custo-benefício",
-    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos", "Suporte VIP", "Backup automático", "Análises avançadas"],
-    limitations: [],
+    features: [
+      "Tudo do plano mensal",
+      "Suporte VIP prioritário", 
+      "Backup automático",
+      "Análises avançadas",
+      "API de integração",
+      "Relatórios personalizados",
+      "Assistente IA via WhatsApp",
+      "Acesso antecipado a novos recursos"
+    ],
     buttonText: "Melhor Oferta",
-    buttonVariant: "default" as const,
     popular: true,
-    linkTo: `/register?priceId=${config.prices.annual.priceId}&planType=annual`
+    linkTo: "/register?plan=annual"
   }];
 
   return (
-    <section className="py-20 w-full" id="planos">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white w-full" id="planos">
       <div className="w-full px-4">
         <motion.div 
           className="text-center mb-16" 
@@ -69,11 +56,11 @@ const LandingPricing = () => {
           transition={{ duration: 0.6 }} 
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
             Escolha o plano ideal para você
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Transforme sua vida financeira com nossos planos completos
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Planos flexíveis que se adaptam às suas necessidades e evoluem conforme sua jornada financeira
           </p>
         </motion.div>
         
@@ -93,55 +80,70 @@ const LandingPricing = () => {
               viewport={{ once: true }} 
               className="relative"
             >
-              <Card className={`h-full relative ${plan.popular ? 'border-[#FFD600] shadow-xl scale-105' : 'hover:shadow-lg'} transition-all duration-300`}>
+              <Card className={`h-full relative ${plan.popular ? 'border-[#FFD600] shadow-2xl scale-105 bg-gradient-to-b from-yellow-50 to-white' : 'hover:shadow-xl bg-white'} transition-all duration-300`}>
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-[#FFD600] text-black px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                      <Star className="h-4 w-4" />
-                      Mais Popular
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                    <div className="bg-gradient-to-r from-[#FFD600] to-[#FFC107] text-black px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
+                      <Star className="h-4 w-4 fill-current" />
+                      MAIS POPULAR - ECONOMIZE 17%
                     </div>
                   </div>
                 )}
                 
-                <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
-                  <div className="mt-4">
+                <CardHeader className="text-center pb-6 pt-8">
+                  <CardTitle className="text-2xl font-bold text-gray-900">{plan.name}</CardTitle>
+                  <div className="mt-6">
                     <div className="flex items-center justify-center gap-2">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-muted-foreground">{plan.period}</span>
+                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                      <span className="text-gray-600">{plan.period}</span>
                     </div>
                     {plan.originalPrice && (
-                      <div className="mt-2">
-                        <span className="text-sm text-muted-foreground line-through">{plan.originalPrice}</span>
-                        <span className="ml-2 text-sm font-medium text-[#FFD600]">{plan.savings}</span>
+                      <div className="mt-3">
+                        <span className="text-lg text-gray-400 line-through">{plan.originalPrice}</span>
+                        <div className="mt-1 text-sm font-semibold text-green-600">{plan.savings}</div>
                       </div>
                     )}
                   </div>
-                  <p className="text-muted-foreground mt-2">{plan.description}</p>
+                  <p className="text-gray-600 mt-4 font-medium">{plan.description}</p>
                 </CardHeader>
                 
-                <CardContent className="pt-0">
-                  <ul className="space-y-3 mb-8">
+                <CardContent className="pt-0 pb-8">
+                  <ul className="space-y-4 mb-8">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-[#FFD600] flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                    {plan.limitations.map((limitation, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-muted-foreground">
-                        <span className="text-sm">{limitation}</span>
+                        <Check className="h-5 w-5 text-[#FFD600] flex-shrink-0 bg-yellow-100 rounded-full p-1" />
+                        <span className="text-sm text-gray-700">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
-                  <Button className="w-full bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold" variant="default" size="lg" asChild>
+                  <Button 
+                    className={`w-full font-bold text-lg py-6 rounded-full transition-all duration-300 ${
+                      plan.popular 
+                        ? 'bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black shadow-lg hover:shadow-xl transform hover:scale-105' 
+                        : 'bg-gray-900 hover:bg-gray-800 text-white border border-gray-300 hover:border-[#FFD600]'
+                    }`}
+                    size="lg" 
+                    asChild
+                  >
                     <Link to={plan.linkTo}>{plan.buttonText}</Link>
                   </Button>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
+        </motion.div>
+        
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-gray-600 text-sm">
+            ✅ Pagamento seguro via cartão de crédito • 🔄 Cancele quando quiser • 🛡️ Dados 100% protegidos
+          </p>
         </motion.div>
       </div>
     </section>
