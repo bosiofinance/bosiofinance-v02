@@ -24,9 +24,11 @@ const Funcionalidades = () => {
       title: "Dashboard Inteligente",
       description: "Visualize suas finanças em tempo real com gráficos interativos e indicadores personalizados. Acompanhe seu progresso financeiro de forma visual e intuitiva."
     },
-    {
-      icon: CurrencyDollarIcon,
-      title: "Controle de Transações",
+    {{
+  icon: FlagIcon,  // ← e aqui também
+  title: "Metas Financeiras",
+  // resto igual...
+}
       description: "Registre receitas e despesas de forma simples e rápida. Categorização automática e manual para melhor organização dos seus gastos."
     },
     {
