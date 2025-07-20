@@ -1,4 +1,3 @@
- 1. src/index.css - CORRIGIDO
 /* Inter font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -8,7 +7,7 @@
 
 @layer base {
   :root {
-    /* Cores XP REAIS */
+    /* Cores XP */
     --xp-yellow-primary: #FFD600;
     --xp-yellow-secondary: #FFC107;
     --xp-black: #1A1A1A;
@@ -96,6 +95,96 @@
   }
 }
 
+@layer base {
+  * {
+    @apply border-border transition-colors duration-200;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Custom scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--xp-yellow-primary);
+    @apply rounded-full hover:opacity-80 transition-opacity;
+  }
+
+  /* Smooth animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* Classes utilitárias XP */
 .xp-yellow-bg { 
   background-color: var(--xp-yellow-primary); 
@@ -111,16 +200,6 @@
 
 .xp-yellow-border { 
   border-color: var(--xp-yellow-primary); 
-}
-
-/* Custom hover colors - XP Style */
-.hover\:bg-accent:hover {
-  background-color: var(--xp-yellow-secondary);
-}
-
-.hover\:bg-accent\/80:hover {
-  background-color: var(--xp-yellow-primary);
-  opacity: 0.8;
 }
 
 /* Enhanced card shadows */
