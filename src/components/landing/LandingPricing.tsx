@@ -93,10 +93,10 @@ const LandingPricing = () => {
               viewport={{ once: true }} 
               className="relative"
             >
-              <Card className={`h-full relative ${plan.popular ? 'border-[#0066FF] shadow-xl scale-105' : 'hover:shadow-lg'} transition-all duration-300`}>
+              <Card className={`h-full relative ${plan.popular ? 'border-[#FFD600] shadow-xl scale-105' : 'hover:shadow-lg'} transition-all duration-300`}>
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-[#0066FF] text-white px-4 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                    <div className="bg-[#FFD600] text-black px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1">
                       <Star className="h-4 w-4" />
                       Mais Popular
                     </div>
@@ -113,7 +113,7 @@ const LandingPricing = () => {
                     {plan.originalPrice && (
                       <div className="mt-2">
                         <span className="text-sm text-muted-foreground line-through">{plan.originalPrice}</span>
-                        <span className="ml-2 text-sm font-medium text-[#0066FF]">{plan.savings}</span>
+                        <span className="ml-2 text-sm font-medium text-[#FFD600]">{plan.savings}</span>
                       </div>
                     )}
                   </div>
@@ -124,7 +124,7 @@ const LandingPricing = () => {
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-[#0066FF] flex-shrink-0" />
+                        <Check className="h-5 w-5 text-[#FFD600] flex-shrink-0" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
@@ -135,7 +135,7 @@ const LandingPricing = () => {
                     ))}
                   </ul>
                   
-                  <Button className="w-full bg-[#0066FF] hover:bg-[#003BFF] text-white border-none" variant="default" size="lg" asChild>
+                  <Button className="w-full bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold" variant="default" size="lg" asChild>
                     <Link to={plan.linkTo}>{plan.buttonText}</Link>
                   </Button>
                 </CardContent>
