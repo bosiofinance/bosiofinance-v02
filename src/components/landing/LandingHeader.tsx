@@ -28,7 +28,6 @@ const LandingHeader = () => {
             alt={logoAltText}
             className="h-10 object-contain"
             onError={(e) => {
-              // Fallback para primeira letra do nome da empresa
               const target = e.currentTarget as HTMLImageElement;
               target.style.display = 'none';
               const nextSibling = target.nextElementSibling as HTMLElement;
@@ -37,17 +36,17 @@ const LandingHeader = () => {
               }
             }}
           />
-          <span className="text-xl font-bold text-[#0066FF]">{companyName}</span>
+          <span className="text-xl font-bold text-[#FFD600]">{companyName}</span>
         </div>
         
         <div className="flex items-center space-x-2 md:space-x-4">
-          <Button variant="ghost" className="hover:text-[#0066FF]" asChild>
+          <Button variant="ghost" className="hover:text-[#FFD600] hover:bg-[#FFD600]/10" asChild>
             <Link to="/login">Entrar</Link>
           </Button>
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-[#0066FF] hover:bg-[#003BFF] text-white border-none"
+            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold"
             size="sm"
           >
             Estou pronto para economizar
@@ -55,7 +54,7 @@ const LandingHeader = () => {
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="inline-flex sm:hidden bg-[#0066FF] hover:bg-[#003BFF] text-white border-none"
+            className="inline-flex sm:hidden bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold"
             size="sm"
           >
             Economizar
@@ -65,5 +64,3 @@ const LandingHeader = () => {
     </motion.header>
   );
 };
-
-export default LandingHeader;
