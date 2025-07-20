@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ChartBarIcon, ShieldCheckIcon, DevicePhoneMobileIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import { useBrandingConfig } from '@/hooks/useBrandingConfig';
 
-const LandingHero = () => {
-  const { companyName } = useBrandingConfig();
-
+const LandingHeader = () => {
+  const { companyName, logoUrl, logoAltText } = useBrandingConfig();
+  
   const scrollToPlans = useCallback(() => {
     const section = document.getElementById('planos');
     if (section) {
@@ -16,91 +15,54 @@ const LandingHero = () => {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 w-full bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Principal */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black leading-tight">
-            Você ainda não sabe para onde vai seu dinheiro?
-          </h1>
-
-          <p className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto text-[#414042] font-light leading-relaxed">
-            Pare de se perder nas planilhas. Com o{' '}
-            <strong className="text-black font-bold">{companyName}</strong>, você organiza, define metas e acompanha seu progresso sem complicação.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button
-              size="lg"
-              className="bg-[#FFD600] hover:bg-[#E6C200] text-black font-bold px-8 py-4 text-lg rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
-              onClick={scrollToPlans}
-            >
-              Quero começar agora mesmo
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-black text-black hover:bg-black hover:text-white font-semibold px-8 py-4 text-lg rounded-lg transition-all duration-300"
-              asChild
-            >
-              <Link to="/login">Já tenho conta</Link>
-            </Button>
-          </div>
-
-          {/* Badge de Confiança */}
-          <div className="inline-flex items-center gap-2 bg-[#F6F6F6] px-4 py-2 rounded-full border border-gray-200">
-            <ShieldCheckIcon className="w-5 h-5 text-black" />
-            <span className="text-sm text-[#414042] font-medium">
-              Criado por <strong className="text-black">Jhony Bosio</strong>, Assessor de Investimentos
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Cards de Benefícios */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <div className="w-14 h-14 bg-black rounded-2xl flex items-center justify-center mb-6">
-              <ChartBarIcon className="w-7 h-7 text-white" />
-            </div>
-            <h3 className="text-xl font-bold mb-3 text-black">Domine seus gastos</h3>
-            <p className="text-[#414042] leading-relaxed">
-              Veja exatamente para onde seu dinheiro vai com dashboards claros e categorização inteligente.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <div className="w-14 h-14 bg-[#FFD600] rounded-2xl flex items-center justify-center mb-6">
-              <ShieldCheckIcon className="w-7 h-7 text-black" />
-            </div>
-            <h3 className="text-xl font-bold mb-3 text-black">Privacidade blindada</h3>
-            <p className="text-[#414042] leading-relaxed">
-              Seus dados 100% criptografados e protegidos com a mesma segurança utilizada por grandes bancos.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <div className="w-14 h-14 bg-[#414042] rounded-2xl flex items-center justify-center mb-6">
-              <DevicePhoneMobileIcon className="w-7 h-7 text-white" />
-            </div>
-            <h3 className="text-xl font-bold mb-3 text-black">Use onde quiser</h3>
-            <p className="text-[#414042] leading-relaxed">
-              Acesse do celular, tablet ou computador. Sincronização automática em todos os dispositivos.
-            </p>
-          </div>
-        </motion.div>
+    <motion.header 
+      className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b w-full"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="w-full px-4 py-4 flex items-center justify-between max-w-none">
+        <div className="flex items-center space-x-2">
+          <img 
+            src={logoUrl} 
+            alt={logoAltText}
+            className="h-10 object-contain"
+            onError={(e) => {
+              const target = e.currentTarget as HTMLImageElement;
+              target.style.display = 'none';
+              const nextSibling = target.nextElementSibling as HTMLElement;
+              if (nextSibling) {
+                nextSibling.style.display = 'block';
+              }
+            }}
+          />
+          <span className="text-xl font-bold text-[#FFD600]">{companyName}</span>
+        </div>
+        
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <Button variant="ghost" className="hover:text-[#FFD600] hover:bg-[#FFD600]/10" asChild>
+            <Link to="/login">Entrar</Link>
+          </Button>
+          <Button 
+            asChild={false} 
+            onClick={scrollToPlans}
+            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold"
+            size="sm"
+          >
+            Estou pronto para economizar
+          </Button>
+          <Button 
+            asChild={false} 
+            onClick={scrollToPlans}
+            className="inline-flex sm:hidden bg-[#FFD600] hover:bg-[#FFC107] text-black border-none font-bold"
+            size="sm"
+          >
+            Economizar
+          </Button>
+        </div>
       </div>
-    </section>
+    </motion.header>
   );
 };
 
-export default LandingHero;
+export default LandingHeader;
