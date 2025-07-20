@@ -104,14 +104,14 @@ const LandingPage = () => {
             <div className="col-span-1 md:col-span-2">
               <h3 className="text-xl font-bold mb-4 text-[#FFD600]">{companyName}</h3>
               <p className="text-gray-300 leading-relaxed max-w-md">
-                A ferramenta completa para organizar suas finanças, criada por Jhony Bosio, 
-                Assessor de Investimentos certificado na XP.
+                A ferramenta completa para organizar suas finanças pessoais, 
+                definir metas e alcançar a liberdade financeira.
               </p>
               <div className="mt-6">
                 <p className="text-sm text-gray-400">
-                  🚀 Futuro: Integração Open Finance via Pluggy AI<br/>
-                  🛡️ Tecnologia bancária de segurança<br/>
-                  📱 Multiplataforma (Web, iOS, Android)
+                  🛡️ Dados 100% seguros e criptografados<br/>
+                  📊 Dashboard inteligente e intuitivo<br/>
+                  💰 Controle total dos seus gastos
                 </p>
               </div>
             </div>
