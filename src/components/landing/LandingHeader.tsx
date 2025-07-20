@@ -1,4 +1,3 @@
-
 import React, { useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -27,7 +26,7 @@ const LandingHeader = () => {
           <img 
             src={logoUrl} 
             alt={logoAltText}
-            className="h-10 object-contain" // Aumentado o tamanho e removido o container
+            className="h-10 object-contain"
             onError={(e) => {
               // Fallback para primeira letra do nome da empresa
               const target = e.currentTarget as HTMLImageElement;
@@ -38,17 +37,17 @@ const LandingHeader = () => {
               }
             }}
           />
-          <span className="text-xl font-bold text-primary">{companyName}</span>
+          <span className="text-xl font-bold text-[#0066FF]">{companyName}</span>
         </div>
         
         <div className="flex items-center space-x-2 md:space-x-4">
-          <Button variant="ghost" asChild>
+          <Button variant="ghost" className="hover:text-[#0066FF]" asChild>
             <Link to="/login">Entrar</Link>
           </Button>
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base"
+            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-[#0066FF] hover:bg-[#003BFF] text-white border-none"
             size="sm"
           >
             Estou pronto para economizar
@@ -56,7 +55,7 @@ const LandingHeader = () => {
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="inline-flex sm:hidden"
+            className="inline-flex sm:hidden bg-[#0066FF] hover:bg-[#003BFF] text-white border-none"
             size="sm"
           >
             Economizar
