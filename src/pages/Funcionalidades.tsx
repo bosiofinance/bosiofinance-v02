@@ -14,7 +14,7 @@ import {
   DevicePhoneMobileIcon,
   CreditCardIcon,
   BanknotesIcon,
-  TargetIcon
+  FlagIcon
 } from '@heroicons/react/24/outline';
 
 const Funcionalidades = () => {
