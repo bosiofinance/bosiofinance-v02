@@ -4,8 +4,6 @@ import LandingHero from '@/components/landing/LandingHero';
 import LandingFeatures from '@/components/landing/LandingFeatures';
 import LandingPricing from '@/components/landing/LandingPricing';
 import LandingBenefits from '@/components/landing/LandingBenefits';
-import LandingTestimonials from '@/components/landing/LandingTestimonials';
-import LandingFAQ from '@/components/landing/LandingFAQ';
 import LandingCTA from '@/components/landing/LandingCTA';
 import LandingHeader from '@/components/landing/LandingHeader';
 import { motion } from 'framer-motion';
@@ -90,10 +88,8 @@ const LandingPage = () => {
       >
         <LandingHero />
         <LandingFeatures />
-        <LandingTestimonials />
         <LandingPricing />
         <LandingBenefits />
-        <LandingFAQ />
         <LandingCTA />
       </motion.main>
       
@@ -120,7 +116,6 @@ const LandingPage = () => {
               <ul className="space-y-2 text-gray-300">
                 <li><Link to="/funcionalidades" className="hover:text-[#FFD600] transition-colors">Funcionalidades</Link></li>
                 <li><a href="/#planos" className="hover:text-[#FFD600] transition-colors">Planos</a></li>
-                <li><a href="/#faq" className="hover:text-[#FFD600] transition-colors">Segurança</a></li>
                 <li><Link to="/contato" className="hover:text-[#FFD600] transition-colors">Suporte</Link></li>
               </ul>
             </div>
@@ -135,7 +130,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 {companyName} - Transforme sua vida financeira | Desenvolvido com 💛 por Jhony Bosio</p>
+            <p>&copy; 2025 {companyName} - Transforme sua vida financeira</p>
           </div>
         </div>
       </footer>
