@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRightIcon, StarIcon } from '@heroicons/react/24/outline';
 
 const LandingCTA = () => {
   return (
@@ -28,7 +28,7 @@ const LandingCTA = () => {
             className="mb-8"
           >
             <div className="inline-flex items-center bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-white px-6 py-3 rounded-full font-bold text-sm mb-6">
-              <Star className="mr-2 h-4 w-4 fill-current" />
+              <StarIcon className="mr-2 h-4 w-4 fill-current" />
               Oferta Especial Limitada
             </div>
           </motion.div>
@@ -69,7 +69,7 @@ const LandingCTA = () => {
             >
               <Link to="/register?plan=annual">
                 Quero começar agora mesmo
-                <ArrowRight className="ml-2 h-6 w-6" />
+                <ArrowRightIcon className="ml-2 h-6 w-6" />
               </Link>
             </Button>
             
