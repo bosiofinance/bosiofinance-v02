@@ -2,8 +2,8 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-# Use npm ci para instalações mais rápidas e consistentes em CI/CD
-RUN npm ci
+# Use npm install para evitar problemas de sincronização
+RUN npm install
 COPY . .
 RUN npm run build
 
