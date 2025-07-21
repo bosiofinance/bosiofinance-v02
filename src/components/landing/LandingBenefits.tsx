@@ -62,8 +62,8 @@ const LandingBenefits = () => {
             >
               <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm hover:bg-white group">
                 <CardContent className="p-6 text-center">
-                  <div className="bg-gradient-to-br from-[#FFD600] to-[#FFC107] p-4 rounded-full w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <benefit.icon className="h-8 w-8 text-black mx-auto" />
+                  <div className="bg-gradient-to-br from-[#FF6B35] to-[#E55A2B] p-4 rounded-full w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <benefit.icon className="h-8 w-8 text-white mx-auto" />
                   </div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-900">{benefit.title}</h3>
                   <p className="text-gray-600 leading-relaxed text-sm">{benefit.description}</p>
@@ -88,11 +88,11 @@ const LandingBenefits = () => {
                   <img 
                     src="https://page.gensparksite.com/v1/base64_upload/1b5c7d717a85c7848e56748ec5b6e642" 
                     alt="Jhony Bosio - Assessor de Investimentos XP"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-[#FFD600] shadow-lg"
+                    className="w-32 h-32 rounded-full object-cover border-4 border-[#FF6B35] shadow-lg"
                   />
                 </div>
                 <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#FFD600]">
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-[#FF6B35]">
                     Sobre o Criador
                   </h3>
                   <h4 className="text-xl font-semibold mb-4 text-white">
@@ -104,7 +104,7 @@ const LandingBenefits = () => {
                     O Bosio Finance é sua porta de entrada para um ecossistema completo de 
                     soluções financeiras.
                   </p>
-                  <p className="text-[#FFD600] font-medium">
+                  <p className="text-[#FF6B35] font-medium">
                     ✓ Assessor de Investimentos certificado XP<br/>
                     ✓ Especialista em crescimento patrimonial<br/>
                     ✓ Desenvolvedor de soluções financeiras inovadoras
