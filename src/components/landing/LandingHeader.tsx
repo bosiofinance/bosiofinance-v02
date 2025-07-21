@@ -32,13 +32,13 @@ const LandingHeader = () => {
         </div>
         
         <div className="flex items-center space-x-2 md:space-x-4">
-          <Button variant="ghost" className="hover:text-[#FFD600] hover:bg-[#FFD600]/10 text-gray-700 font-medium" asChild>
+          <Button variant="ghost" className="hover:text-[#FF6B35] hover:bg-[#FF6B35]/10 text-gray-700 font-medium" asChild>
             <Link to="/login">Entrar</Link>
           </Button>
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black border-none font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+            className="hidden sm:inline-flex text-xs sm:text-sm md:text-base bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] hover:from-[#E55A2B] hover:to-[#D84315] text-white border-none font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
             size="sm"
           >
             Estou pronto para economizar
@@ -46,7 +46,7 @@ const LandingHeader = () => {
           <Button 
             asChild={false} 
             onClick={scrollToPlans}
-            className="inline-flex sm:hidden bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black border-none font-bold shadow-lg"
+            className="inline-flex sm:hidden bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] hover:from-[#E55A2B] hover:to-[#D84315] text-white border-none font-bold shadow-lg"
             size="sm"
           >
             Economizar
