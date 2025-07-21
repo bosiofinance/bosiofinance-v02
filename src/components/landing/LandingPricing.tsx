@@ -80,10 +80,10 @@ const LandingPricing = () => {
               viewport={{ once: true }} 
               className="relative"
             >
-              <Card className={`h-full relative ${plan.popular ? 'border-[#FFD600] shadow-2xl scale-105 bg-gradient-to-b from-yellow-50 to-white' : 'hover:shadow-xl bg-white'} transition-all duration-300`}>
+              <Card className={`h-full relative ${plan.popular ? 'border-[#FF6B35] shadow-2xl scale-105 bg-gradient-to-b from-orange-50 to-white' : 'hover:shadow-xl bg-white'} transition-all duration-300`}>
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="bg-gradient-to-r from-[#FFD600] to-[#FFC107] text-black px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
+                    <div className="bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
                       <Star className="h-4 w-4 fill-current" />
                       MAIS POPULAR - ECONOMIZE 17%
                     </div>
@@ -111,7 +111,7 @@ const LandingPricing = () => {
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-[#FFD600] flex-shrink-0 bg-yellow-100 rounded-full p-1" />
+                        <Check className="h-5 w-5 text-[#FF6B35] flex-shrink-0 bg-orange-100 rounded-full p-1" />
                         <span className="text-sm text-gray-700">{feature}</span>
                       </li>
                     ))}
@@ -120,8 +120,8 @@ const LandingPricing = () => {
                   <Button 
                     className={`w-full font-bold text-lg py-6 rounded-full transition-all duration-300 ${
                       plan.popular 
-                        ? 'bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black shadow-lg hover:shadow-xl transform hover:scale-105' 
-                        : 'bg-gray-900 hover:bg-gray-800 text-white border border-gray-300 hover:border-[#FFD600]'
+                        ? 'bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] hover:from-[#E55A2B] hover:to-[#D84315] text-white shadow-lg hover:shadow-xl transform hover:scale-105' 
+                        : 'bg-gray-900 hover:bg-gray-800 text-white border border-gray-300 hover:border-[#FF6B35]'
                     }`}
                     size="lg" 
                     asChild
