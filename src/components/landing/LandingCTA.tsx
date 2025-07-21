@@ -8,9 +8,9 @@ const LandingCTA = () => {
   return (
     <section className="py-20 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#FFD600]/10 to-transparent"></div>
-      <div className="absolute top-10 right-10 w-72 h-72 bg-[#FFD600] rounded-full mix-blend-multiply filter blur-xl opacity-10"></div>
-      <div className="absolute bottom-10 left-10 w-72 h-72 bg-yellow-400 rounded-full mix-blend-multiply filter blur-xl opacity-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B35]/10 to-transparent"></div>
+      <div className="absolute top-10 right-10 w-72 h-72 bg-[#FF6B35] rounded-full mix-blend-multiply filter blur-xl opacity-10"></div>
+      <div className="absolute bottom-10 left-10 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-xl opacity-10"></div>
       
       <div className="relative z-10 w-full px-4">
         <motion.div
@@ -27,7 +27,7 @@ const LandingCTA = () => {
             viewport={{ once: true }}
             className="mb-8"
           >
-            <div className="inline-flex items-center bg-[#FFD600] text-black px-6 py-3 rounded-full font-bold text-sm mb-6">
+            <div className="inline-flex items-center bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-white px-6 py-3 rounded-full font-bold text-sm mb-6">
               <Star className="mr-2 h-4 w-4 fill-current" />
               Oferta Especial Limitada
             </div>
@@ -41,7 +41,7 @@ const LandingCTA = () => {
             viewport={{ once: true }}
           >
             Sua liberdade financeira está a um clique de{' '}
-            <span className="text-[#FFD600]">distância</span>
+            <span className="text-[#FF6B35]">distância</span>
           </motion.h2>
           
           <motion.p
@@ -64,7 +64,7 @@ const LandingCTA = () => {
           >
             <Button
               size="lg"
-              className="bg-gradient-to-r from-[#FFD600] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB000] text-black font-bold text-xl px-12 py-6 rounded-full border-none shadow-2xl hover:shadow-[#FFD600]/25 transform hover:scale-105 transition-all duration-300"
+              className="bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] hover:from-[#E55A2B] hover:to-[#D84315] text-white font-bold text-xl px-12 py-6 rounded-full border-none shadow-2xl hover:shadow-[#FF6B35]/25 transform hover:scale-105 transition-all duration-300"
               asChild
             >
               <Link to="/register?plan=annual">
@@ -75,7 +75,7 @@ const LandingCTA = () => {
             
             <div className="text-center">
               <p className="text-sm text-gray-400 mb-1">A partir de</p>
-              <p className="text-2xl font-bold text-[#FFD600]">R$ 16,58/mês</p>
+              <p className="text-2xl font-bold text-[#FF6B35]">R$ 16,58/mês</p>
               <p className="text-sm text-gray-400">(no plano anual)</p>
             </div>
           </motion.div>
