@@ -73,8 +73,8 @@ const LandingFeatures = () => {
             >
               <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-white/80 backdrop-blur-sm hover:bg-white group">
                 <CardContent className="p-6 text-center">
-                  <div className="bg-gradient-to-br from-[#FFD600] to-[#FFC107] p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <feature.icon className="h-12 w-12 text-black mx-auto" />
+                  <div className="bg-gradient-to-br from-[#FF6B35] to-[#E55A2B] p-4 rounded-full w-20 h-20 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="h-12 w-12 text-white mx-auto" />
                   </div>
                   <h3 className="text-xl font-semibold mb-3 text-gray-900">{feature.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{feature.description}</p>
