@@ -10,8 +10,6 @@ services:
       - "4173:4173" # Porta interna do contêiner : porta exposta no host (se rodar localmente)
     environment:
       # Suas variáveis de ambiente (SUPABASE_URL, SUPABASE_ANON_KEY, etc.)
-      VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
-      VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
       VITE_STRIPE_PUBLIC_KEY: ${VITE_STRIPE_PUBLIC_KEY}
       VITE_PRO_MONTHLY_PRICE_ID: ${VITE_PRO_MONTHLY_PRICE_ID}
       VITE_PRO_YEARLY_PRICE_ID: ${VITE_PRO_YEARLY_PRICE_ID}
