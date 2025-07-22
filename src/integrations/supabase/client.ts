@@ -31,18 +31,22 @@ export const supabase = hasValidConfig
 
 // Status da configuração
 export const isUsingPlaceholderConfig = !hasValidConfig;
-export const isSupabaseConfigured = () => hasValidConfig;
+
+// ESTA É A FUNÇÃO IMPORTANTE - ela deve retornar true quando configurado
+export const isSupabaseConfigured = () => {
+  // Força verificação das variáveis de ambiente
+  const url = import.meta.env.VITE_SUPABASE_URL;
+  const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  
+  console.log('🔧 Verificando configuração:', {
+    hasUrl: !!url,
+    hasKey: !!key,
+    urlPreview: url ? `${url.substring(0, 30)}...` : 'não encontrada',
+    keyPreview: key ? `${key.substring(0, 20)}...` : 'não encontrada'
+  });
+  
+  return !!(url && key && url.length > 10 && key.length > 50);
+};
 
 // Exportar configurações
 export { SUPABASE_URL, SUPABASE_ANON_KEY as SUPABASE_PUBLISHABLE_KEY };
-
-// Debug em desenvolvimento
-if (typeof window !== 'undefined' && import.meta.env.DEV) {
-  console.log('🔧 Supabase Config Status:', {
-    configured: hasValidConfig,
-    hasUrl: !!ENV_URL,
-    hasKey: !!ENV_KEY,
-    urlPreview: ENV_URL ? `${ENV_URL.substring(0, 30)}...` : 'não configurada',
-    message: !hasValidConfig ? 'Configure VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY no .env' : 'Configurado corretamente'
-  });
-}
