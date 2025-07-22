@@ -10,9 +10,9 @@ const ENV_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const isValidConfig = (url?: string, key?: string): boolean => {
   if (!url || !key) return false;
   
-  // Verificar se não são valores de placeholder/demo
-  const isPlaceholderUrl = url.includes('rilcjsdbxlyfvuqyqfed') || url.includes('demo');
-  const isPlaceholderKey = key.includes('supabase-demo') || key.length < 100;
+  // Verificar se não são valores de placeholder/demo (REMOVIDO rilcjsdbxlyfvuqyqfed)
+  const isPlaceholderUrl = url.includes('your-project') || url.includes('demo') || url.includes('localhost');
+  const isPlaceholderKey = key.includes('supabase-demo') || key.includes('your-anon-key') || key.length < 100;
   
   return !isPlaceholderUrl && !isPlaceholderKey;
 };
@@ -20,9 +20,9 @@ const isValidConfig = (url?: string, key?: string): boolean => {
 // Verificar se as variáveis estão realmente configuradas
 const hasValidConfig = isValidConfig(ENV_URL, ENV_KEY);
 
-// Configuração final
+// Configuração final - USAR SUAS CREDENCIAIS REAIS
 const SUPABASE_URL = hasValidConfig ? ENV_URL! : 'https://rilcjsdbxlyfvuqyqfed.supabase.co';
-const SUPABASE_ANON_KEY = hasValidConfig ? ENV_KEY! : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0';
+const SUPABASE_ANON_KEY = hasValidConfig ? ENV_KEY! : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbGNqc2RieGx5ZnZ1cXlxZmVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI5NDQwMzAsImV4cCI6MjA2ODUyMDAzMH0.gTt1OsvH3lc_UwBbMIKtVfN934t_FUIheSEOh3IHTFg';
 
 // Criar cliente Supabase
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -40,6 +40,7 @@ if (typeof window !== 'undefined' && import.meta.env.DEV) {
     configured: hasValidConfig,
     hasUrl: !!ENV_URL,
     hasKey: !!ENV_KEY,
-    urlPreview: ENV_URL ? `${ENV_URL.substring(0, 20)}...` : 'não configurada'
+    urlPreview: ENV_URL ? `${ENV_URL.substring(0, 30)}...` : 'não configurada',
+    usingFallback: !hasValidConfig ? 'Usando credenciais hardcoded' : 'Usando .env'
   });
 }
