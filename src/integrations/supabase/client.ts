@@ -10,7 +10,7 @@ const ENV_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const isValidConfig = (url?: string, key?: string): boolean => {
   if (!url || !key) return false;
   
-  // Verificar se não são valores de placeholder/demo (REMOVIDO rilcjsdbxlyfvuqyqfed)
+  // Verificar se não são valores de placeholder/demo
   const isPlaceholderUrl = url.includes('your-project') || url.includes('demo') || url.includes('localhost');
   const isPlaceholderKey = key.includes('supabase-demo') || key.includes('your-anon-key') || key.length < 100;
   
@@ -20,12 +20,14 @@ const isValidConfig = (url?: string, key?: string): boolean => {
 // Verificar se as variáveis estão realmente configuradas
 const hasValidConfig = isValidConfig(ENV_URL, ENV_KEY);
 
-// Configuração final - USAR SUAS CREDENCIAIS REAIS
-const SUPABASE_URL = hasValidConfig ? ENV_URL! : 'https://rilcjsdbxlyfvuqyqfed.supabase.co';
-const SUPABASE_ANON_KEY = hasValidConfig ? ENV_KEY! : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpbGNqc2RieGx5ZnZ1cXlxZmVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI5NDQwMzAsImV4cCI6MjA2ODUyMDAzMH0.gTt1OsvH3lc_UwBbMIKtVfN934t_FUIheSEOh3IHTFg';
+// Usar apenas variáveis de ambiente - NUNCA credenciais hardcoded
+const SUPABASE_URL = ENV_URL || '';
+const SUPABASE_ANON_KEY = ENV_KEY || '';
 
-// Criar cliente Supabase
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Criar cliente Supabase apenas se as credenciais estiverem configuradas
+export const supabase = hasValidConfig 
+  ? createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
 
 // Status da configuração
 export const isUsingPlaceholderConfig = !hasValidConfig;
@@ -41,6 +43,6 @@ if (typeof window !== 'undefined' && import.meta.env.DEV) {
     hasUrl: !!ENV_URL,
     hasKey: !!ENV_KEY,
     urlPreview: ENV_URL ? `${ENV_URL.substring(0, 30)}...` : 'não configurada',
-    usingFallback: !hasValidConfig ? 'Usando credenciais hardcoded' : 'Usando .env'
+    message: !hasValidConfig ? 'Configure VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY no .env' : 'Configurado corretamente'
   });
 }
