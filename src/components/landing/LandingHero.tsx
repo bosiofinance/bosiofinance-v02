@@ -103,7 +103,7 @@ const LandingHero = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @media (max-width: 768px) {
           .bg-clip-text {
             background: #D84315 !important;

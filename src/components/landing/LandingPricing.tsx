@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, Star } from 'lucide-react';
+import { Check, Star, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePlanConfig } from '@/hooks/usePlanConfig';
 
 const LandingPricing = () => {
   const { config, isLoading, error } = usePlanConfig();
+  
+  console.log('LandingPricing render:', { config, isLoading, error });
 
   if (isLoading) {
     return (
