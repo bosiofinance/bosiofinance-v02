@@ -23,7 +23,7 @@ const LandingPricing = () => {
     ],
     buttonText: "Assinar Agora",
     popular: false,
-    linkTo: "/register?plan=monthly"
+    linkTo: "/register?priceId=${config.prices.monthly.priceId}&planType=monthly"
   }, {
     name: "Anual",
     price: "R$ 199,00",
@@ -43,7 +43,7 @@ const LandingPricing = () => {
     ],
     buttonText: "Melhor Oferta",
     popular: true,
-    linkTo: "/register?plan=annual"
+    linkTo: "/register?priceId=${config.prices.annual.priceId}&planType=annual"
   }];
 
   return (
