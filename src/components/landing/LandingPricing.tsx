@@ -4,11 +4,38 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Check, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { usePlanConfig } from '@/hooks/usePlanConfig';
 
 const LandingPricing = () => {
+  const { config, isLoading, error } = usePlanConfig();
+
+  if (isLoading) {
+    return (
+      <section className="py-20 w-full" id="planos">
+        <div className="w-full px-4">
+          <div className="flex items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !config) {
+    return (
+      <section className="py-20 w-full" id="planos">
+        <div className="w-full px-4">
+          <div className="text-center text-red-600">
+            Erro ao carregar configurações dos planos
+          </div>
+        </div>
+      </section>
+    );
+  }
+  
   const plans = [{
     name: "Mensal",
-    price: "R$ 19,90",
+    price: config.prices.monthly.displayPrice,
     period: "/mês",
     description: "Para uso pessoal completo",
     features: [
@@ -21,15 +48,17 @@ const LandingPricing = () => {
       "Categorização automática",
       "Exportação de dados"
     ],
+    limitations: [],
     buttonText: "Assinar Agora",
+    buttonVariant: "default" as const,
     popular: false,
-    linkTo: "/register?priceId=${config.prices.monthly.priceId}&planType=monthly"
+    linkTo: `/register?priceId=${config.prices.monthly.priceId}&planType=monthly`
   }, {
     name: "Anual",
-    price: "R$ 199,00",
+    price: config.prices.annual.displayPrice,
     period: "/ano",
-    originalPrice: "R$ 238,80",
-    savings: "Economize R$ 39,80 (17%)",
+    originalPrice: config.prices.annual.displayOriginalPrice,
+    savings: config.prices.annual.displaySavings,
     description: "Melhor custo-benefício",
     features: [
       "Tudo do plano mensal",
@@ -41,9 +70,11 @@ const LandingPricing = () => {
       "Assistente IA via WhatsApp",
       "Acesso antecipado a novos recursos"
     ],
+    limitations: [],
     buttonText: "Melhor Oferta",
+    buttonVariant: "default" as const,
     popular: true,
-    linkTo: "/register?priceId=${config.prices.annual.priceId}&planType=annual"
+    linkTo: `/register?priceId=${config.prices.annual.priceId}&planType=annual`
   }];
 
   return (
