@@ -38,16 +38,7 @@ const LandingPricing = () => {
     price: config.prices.monthly.displayPrice,
     period: "/mês",
     description: "Para uso pessoal completo",
-    features: [
-      "Movimentos ilimitados",
-      "Dashboard completo", 
-      "Todos os relatórios",
-      "Metas ilimitadas",
-      "Agendamentos automáticos",
-      "Suporte por email",
-      "Categorização automática",
-      "Exportação de dados"
-    ],
+    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos automáticos", "Suporte por email", "Categorização automática", "Exportação de dados"],
     limitations: [],
     buttonText: "Assinar Agora",
     buttonVariant: "default" as const,
@@ -60,16 +51,7 @@ const LandingPricing = () => {
     originalPrice: config.prices.annual.displayOriginalPrice,
     savings: config.prices.annual.displaySavings,
     description: "Melhor custo-benefício",
-    features: [
-      "Tudo do plano mensal",
-      "Suporte VIP prioritário", 
-      "Backup automático",
-      "Análises avançadas",
-      "API de integração",
-      "Relatórios personalizados",
-      "Assistente IA via WhatsApp",
-      "Acesso antecipado a novos recursos"
-    ],
+    features: ["Tudo do plano mensal", "Suporte VIP prioritário", "Backup automático", "Análises avançadas", "API de integração", "Relatórios personalizados", "Assistente IA via WhatsApp", "Acesso antecipado a novos recursos"],
     limitations: [],
     buttonText: "Melhor Oferta",
     buttonVariant: "default" as const,
@@ -144,6 +126,11 @@ const LandingPricing = () => {
                       <li key={idx} className="flex items-center gap-3">
                         <Check className="h-5 w-5 text-[#FF6B35] flex-shrink-0 bg-orange-100 rounded-full p-1" />
                         <span className="text-sm text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                    {plan.limitations.map((limitation, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-muted-foreground">
+                        <span className="text-sm">{limitation}</span>
                       </li>
                     ))}
                   </ul>
