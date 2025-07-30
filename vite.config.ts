@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => ({
         background_color: '#ffffff',
         icons: [
           {
-            src: '/lovable-uploads/feb4b0d7-9e89-45bc-bae1-72b1af54eacd.png',
+            src: '/lovable-uploads/feb4b0d7-9e89-45bc-bae1-72b1af54eacd.jpg',
             sizes: '192x192',
             type: 'image/png'
           }
