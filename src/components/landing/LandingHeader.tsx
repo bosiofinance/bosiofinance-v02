@@ -24,8 +24,8 @@ const LandingHeader = () => {
       <div className="w-full px-4 py-4 flex items-center justify-between max-w-none">
         <div className="flex items-center space-x-3">
           <img 
-            src="https://page.gensparksite.com/v1/base64_upload/1b5c7d717a85c7848e56748ec5b6e642" 
-            alt="Bosio Finance - Assessoria de Investimentos"
+            src={logoUrl} 
+            alt={logoAltText}
             className="h-12 w-12 object-contain rounded-full shadow-sm"
           />
           <span className="text-xl font-bold text-gray-900">{companyName}</span>
