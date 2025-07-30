@@ -26,7 +26,16 @@ const LandingHeader = () => {
           <img 
             src={logoUrl} 
             alt={logoAltText}
-            className="h-12 w-12 object-contain rounded-full shadow-sm"
+            className="h-16 object-contain" // Aumentado o tamanho e removido o container
+            onError={(e) => {
+              // Fallback para primeira letra do nome da empresa
+              const target = e.currentTarget as HTMLImageElement;
+              target.style.display = 'none';
+              const nextSibling = target.nextElementSibling as HTMLElement;
+              if (nextSibling) {
+                nextSibling.style.display = 'block';
+              }
+            }}
           />
           <span className="text-xl font-bold text-gray-900">{companyName}</span>
         </div>
