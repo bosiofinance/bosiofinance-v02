@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useBrandingConfig } from '@/hooks/useBrandingConfig';
 
 const LandingHeader = () => {
-  const { companyName } = useBrandingConfig();
+  const { companyName, logoUrl, logoAltText } = useBrandingConfig();
   
   const scrollToPlans = useCallback(() => {
     const section = document.getElementById('planos');
