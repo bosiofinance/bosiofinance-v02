@@ -16,9 +16,9 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'PoupeJá',
-        short_name: 'PoupeJá',
-        description: 'Gerencie suas finanças com PoupeJá',
+        name: 'Basio Finance',
+        short_name: 'Bosio Finance',
+        description: 'Gerencie suas finanças com Bosio Finance',
         theme_color: '#005C6E',
         background_color: '#ffffff',
         icons: [
