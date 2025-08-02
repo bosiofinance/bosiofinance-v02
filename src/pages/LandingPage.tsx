@@ -69,16 +69,16 @@ const LandingPage = () => {
   // Mostrar um loading mínimo enquanto carrega o tema para evitar flash
   if (!isThemeLoaded || brandingLoading) {
     return (
-      <div className="min-h-screen w-full bg-white flex items-center justify-center">
+      <div className="min-h-screen w-full bg-gradient-to-br from-background via-muted/20 to-background flex items-center justify-center">
         <div className="animate-pulse">
-          <div className="h-8 w-32 bg-gray-200 rounded"></div>
+          <div className="h-8 w-32 bg-muted rounded"></div>
         </div>
       </div>
     );
   }
   
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-gradient-to-br from-background via-muted/20 to-background">
       <LandingHeader />
       <motion.main
         className="w-full"
