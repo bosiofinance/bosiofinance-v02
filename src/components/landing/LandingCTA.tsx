@@ -7,10 +7,10 @@ import { ArrowRightIcon, StarIcon } from '@heroicons/react/24/outline';
 const LandingCTA = () => {
   return (
     <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent text-black relative overflow-hidden">
-      {/* Fundo com gradiente escuro personalizado */}
+      {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-secondary to-transparent" />
+      {/* Removidos círculos com cores fixas para evitar conflito com seu tema */}
 
-      {/* Container central */}
       <div className="relative z-10 w-full px-4">
         <motion.div
           className="max-w-4xl mx-auto text-center"
@@ -19,7 +19,7 @@ const LandingCTA = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* Banner de destaque */}
+          {/* Badge de oferta especial com gradiente de cores do tema */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -54,10 +54,10 @@ const LandingCTA = () => {
             viewport={{ once: true }}
           >
             Mais de 10.000 pessoas já transformaram suas vidas financeiras com o Bosio Finance.
-            Não perca tempo – cada dia sem controle é dinheiro desperdiçado.
+            Não perca tempo - cada dia sem controle é dinheiro desperdiçado.
           </motion.p>
 
-          {/* Botão e preço */}
+          {/* Botão + Preço */}
           <motion.div
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
             initial={{ opacity: 0, y: 20 }}
