@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, TrendingUp, Shield, Clock } from 'lucide-react';
 
 const LandingHero = () => {
+  const { companyName } = useBrandingConfig();
+  
   const scrollToPlans = useCallback(() => {
     const section = document.getElementById('planos');
     if (section) {
