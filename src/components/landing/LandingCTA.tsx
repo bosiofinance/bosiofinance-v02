@@ -6,7 +6,7 @@ import { ArrowRightIcon, StarIcon } from '@heroicons/react/24/outline';
 
 const LandingCTA = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent text-black relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-primary via-secondary to-accent text-black dark:text-white relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-secondary to-transparent" />
       {/* Removidos círculos com cores fixas para evitar conflito com seu tema */}
