@@ -1,32 +1,31 @@
-
 import React from 'react';
-import { Shield, Clock, Users, Award } from 'lucide-react';
+import { Shield, Clock, TrendingUp, HelpingHand } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useBrandingConfig } from '@/hooks/useBrandingConfig';
 
 const LandingBenefits = () => {
   const { companyName } = useBrandingConfig();
-  
+
   const benefits = [
     {
       icon: Shield,
       title: "Segurança Total",
-      description: "Seus dados são criptografados e protegidos com os mais altos padrões de segurança"
+      description: "Seus dados são criptografados e protegidos com os mais altos padrões de segurança da indústria."
     },
     {
       icon: Clock,
       title: "Economia de Tempo",
-      description: "Automatize suas finanças e tenha mais tempo para o que realmente importa"
+      description: "Automatize suas finanças e tenha mais tempo para o que realmente importa na sua vida."
     },
     {
-      icon: Users,
-      title: "Comunidade Ativa",
-      description: "Faça parte de uma comunidade de pessoas que alcançaram seus objetivos financeiros"
+      icon: TrendingUp,
+      title: "Crescimento Acelerado",
+      description: "Identifique oportunidades de economia e investimento para fazer seu patrimônio crescer."
     },
     {
-      icon: Award,
-      title: "Resultados Comprovados",
-      description: `Milhares de usuários já transformaram suas vidas financeiras com o ${companyName}`
+      icon: HelpingHand,
+      title: "Suporte Expert",
+      description: "Criado por Jhony Bosio, Assessor de Investimentos XP, com foco em educação financeira real."
     }
   ];
 
@@ -44,10 +43,10 @@ const LandingBenefits = () => {
             Por que escolher o {companyName}?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Mais do que uma ferramenta, é o seu parceiro na jornada rumo à liberdade financeira
+            Desenvolvido por um especialista para quem busca resultados reais na vida financeira
           </p>
         </motion.div>
-        
+
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 40 }}
