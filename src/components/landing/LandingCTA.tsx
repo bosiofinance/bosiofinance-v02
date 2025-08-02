@@ -6,7 +6,7 @@ import { ArrowRightIcon, StarIcon } from '@heroicons/react/24/outline';
 
 const LandingCTA = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-primary relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B35]/10 to-transparent"></div>
       <div className="absolute top-10 right-10 w-72 h-72 bg-[#FF6B35] rounded-full mix-blend-multiply filter blur-xl opacity-10"></div>
@@ -27,7 +27,7 @@ const LandingCTA = () => {
             viewport={{ once: true }}
             className="mb-8"
           >
-            <div className="inline-flex items-center bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-white px-6 py-3 rounded-full font-bold text-sm mb-6">
+            <div className="inline-flex items-center bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-primary px-6 py-3 rounded-full font-bold text-sm mb-6">
               <StarIcon className="mr-2 h-4 w-4 fill-current" />
               Oferta Especial Limitada
             </div>
@@ -41,11 +41,11 @@ const LandingCTA = () => {
             viewport={{ once: true }}
           >
             Sua liberdade financeira está a um clique de{' '}
-            <span className="text-[#FF6B35]">distância</span>
+            <span className="text-primary">distância</span>
           </motion.h2>
           
           <motion.p
-            className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-primary mb-10 max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
