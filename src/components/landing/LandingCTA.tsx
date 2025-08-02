@@ -77,9 +77,9 @@ const LandingCTA = () => {
             </Button>
 
             <div className="text-center">
-              <p className="text-sm text-gray-400 mb-1">A partir de</p>
-              <p className="text-2xl font-bold text-primary">R$ 16,58/mês</p>
-              <p className="text-sm text-gray-400">(no plano anual)</p>
+              <p className="text-sm text-foreground mb-1">A partir de</p>
+              <p className="text-2xl font-bold text-foreground">R$ 16,58/mês</p>
+              <p className="text-sm text-foreground">(no plano anual)</p>
             </div>
           </motion.div>
 
