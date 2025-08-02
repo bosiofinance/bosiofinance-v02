@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,8 +9,6 @@ import { usePlanConfig } from '@/hooks/usePlanConfig';
 
 const LandingPricing = () => {
   const { config, isLoading, error } = usePlanConfig();
-  
-  console.log('LandingPricing render:', { config, isLoading, error });
 
   if (isLoading) {
     return (
@@ -34,13 +33,13 @@ const LandingPricing = () => {
       </section>
     );
   }
-  
+
   const plans = [{
     name: "Mensal",
     price: config.prices.monthly.displayPrice,
     period: "/mês",
     description: "Para uso pessoal completo",
-    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos automáticos", "Suporte por email", "Categorização automática", "Exportação de dados"],
+    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos", "Suporte prioritário"],
     limitations: [],
     buttonText: "Assinar Agora",
     buttonVariant: "default" as const,
@@ -53,7 +52,7 @@ const LandingPricing = () => {
     originalPrice: config.prices.annual.displayOriginalPrice,
     savings: config.prices.annual.displaySavings,
     description: "Melhor custo-benefício",
-    features: ["Tudo do plano mensal", "Suporte VIP prioritário", "Backup automático", "Análises avançadas", "API de integração", "Relatórios personalizados", "Assistente IA via WhatsApp", "Acesso antecipado a novos recursos"],
+    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos", "Suporte VIP", "Backup automático", "Análises avançadas"],
     limitations: [],
     buttonText: "Melhor Oferta",
     buttonVariant: "default" as const,
@@ -62,7 +61,7 @@ const LandingPricing = () => {
   }];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white w-full" id="planos">
+    <section className="py-20 w-full" id="planos">
       <div className="w-full px-4">
         <motion.div 
           className="text-center mb-16" 
@@ -71,11 +70,11 @@ const LandingPricing = () => {
           transition={{ duration: 0.6 }} 
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Escolha o plano ideal para você
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Planos flexíveis que se adaptam às suas necessidades e evoluem conforme sua jornada financeira
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Transforme sua vida financeira com nossos planos completos
           </p>
         </motion.div>
         
@@ -95,39 +94,39 @@ const LandingPricing = () => {
               viewport={{ once: true }} 
               className="relative"
             >
-              <Card className={`h-full relative ${plan.popular ? 'border-[#FF6B35] shadow-2xl scale-105 bg-gradient-to-b from-orange-50 to-white' : 'hover:shadow-xl bg-white'} transition-all duration-300`}>
+              <Card className={`h-full relative transition-all duration-300 ${plan.popular ? 'border-primary shadow-md scale-[1.02] z-10' : 'border border-primary shadow-md'}`}>
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg">
-                      <Star className="h-4 w-4 fill-current" />
-                      MAIS POPULAR - ECONOMIZE 17%
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                    <div className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                      <Star className="h-4 w-4" />
+                      Mais Popular
                     </div>
                   </div>
                 )}
                 
-                <CardHeader className="text-center pb-6 pt-8">
-                  <CardTitle className="text-2xl font-bold text-gray-900">{plan.name}</CardTitle>
-                  <div className="mt-6">
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                  <div className="mt-4">
                     <div className="flex items-center justify-center gap-2">
-                      <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
-                      <span className="text-gray-600">{plan.period}</span>
+                      <span className="text-4xl font-bold">{plan.price}</span>
+                      <span className="text-muted-foreground">{plan.period}</span>
                     </div>
                     {plan.originalPrice && (
-                      <div className="mt-3">
-                        <span className="text-lg text-gray-400 line-through">{plan.originalPrice}</span>
-                        <div className="mt-1 text-sm font-semibold text-green-600">{plan.savings}</div>
+                      <div className="mt-2">
+                        <span className="text-sm text-muted-foreground line-through">{plan.originalPrice}</span>
+                        <span className="ml-2 text-sm font-medium text-green-600">{plan.savings}</span>
                       </div>
                     )}
                   </div>
-                  <p className="text-gray-600 mt-4 font-medium">{plan.description}</p>
+                  <p className="text-muted-foreground mt-2">{plan.description}</p>
                 </CardHeader>
                 
-                <CardContent className="pt-0 pb-8">
-                  <ul className="space-y-4 mb-8">
+                <CardContent className="pt-0">
+                  <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-3">
-                        <Check className="h-5 w-5 text-[#FF6B35] flex-shrink-0 bg-orange-100 rounded-full p-1" />
-                        <span className="text-sm text-gray-700">{feature}</span>
+                        <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                     {plan.limitations.map((limitation, idx) => (
@@ -137,33 +136,13 @@ const LandingPricing = () => {
                     ))}
                   </ul>
                   
-                  <Button 
-                    className={`w-full font-bold text-lg py-6 rounded-full transition-all duration-300 ${
-                      plan.popular 
-                        ? 'bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] hover:from-[#E55A2B] hover:to-[#D84315] text-white shadow-lg hover:shadow-xl transform hover:scale-105' 
-                        : 'bg-gray-900 hover:bg-gray-800 text-white border border-gray-300 hover:border-[#FF6B35]'
-                    }`}
-                    size="lg" 
-                    asChild
-                  >
+                  <Button className="w-full" variant={plan.buttonVariant} size="lg" asChild>
                     <Link to={plan.linkTo}>{plan.buttonText}</Link>
                   </Button>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
-        </motion.div>
-        
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-600 text-sm">
-            ✅ Pagamento seguro via cartão de crédito • 🔄 Cancele quando quiser • 🛡️ Dados 100% protegidos
-          </p>
         </motion.div>
       </div>
     </section>
