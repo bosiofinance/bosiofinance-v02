@@ -1,8 +1,10 @@
+
 import React, { useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { TrendingUp, Shield, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ArrowRight, TrendingUp, Shield, Clock } from 'lucide-react';
+import { useBrandingConfig } from '@/hooks/useBrandingConfig';
 
 const LandingHero = () => {
   const { companyName } = useBrandingConfig();
@@ -15,106 +17,66 @@ const LandingHero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-yellow-50 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      <div className="absolute top-20 right-10 w-72 h-72 bg-[#FF6B35] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-      <div className="absolute top-40 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8"
-          >
-            <div className="inline-flex items-center bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] text-white px-6 py-2 rounded-full font-semibold text-sm mb-6 shadow-lg">
-              <TrendingUp className="mr-2 h-4 w-4" />
-              Liberdade Financeira ao Seu Alcance
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight mb-6">
-              Você ainda não sabe para onde vai seu{' '}
-              <span className="bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] bg-clip-text text-transparent font-black">dinheiro?</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-              Pare de se perder nas planilhas. O <strong>Bosio Finance</strong> organiza, 
-              controla e faz seu patrimônio crescer de forma inteligente e automatizada.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-          >
+    <section className="py-20 md:py-32 w-full">
+      <div className="w-full px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Transforme sua vida financeira com o {companyName}
+          </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            A ferramenta completa para controlar suas finanças, definir metas e 
+            alcançar a liberdade financeira que você sempre sonhou.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button 
-              onClick={scrollToPlans}
               size="lg" 
-              className="bg-gradient-to-r from-[#FF6B35] to-[#E55A2B] hover:from-[#E55A2B] hover:to-[#D84315] text-white font-bold text-lg px-8 py-4 rounded-full border-none shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              className="text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-5 md:px-8 md:py-6" 
+              onClick={scrollToPlans}
             >
-              Quero começar agora mesmo
-              <ArrowRight className="ml-2 h-5 w-5" />
+              Estou pronto para economizar
             </Button>
-            
             <Button 
+              size="lg" 
               variant="outline" 
-              size="lg"
-              className="border-2 border-gray-300 hover:border-[#FF6B35] text-gray-700 hover:text-[#FF6B35] font-semibold text-lg px-8 py-4 rounded-full bg-white/80 backdrop-blur-sm"
+              className="text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-5 md:px-8 md:py-6" 
               asChild
             >
               <Link to="/login">Já tenho conta</Link>
             </Button>
-          </motion.div>
-
-          {/* Trust Indicators */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-          >
-            <div className="flex items-center justify-center space-x-3 bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <Shield className="h-8 w-8 text-[#FF6B35]" />
-              <div className="text-left">
-                <p className="font-semibold text-gray-900">100% Seguro</p>
-                <p className="text-sm text-gray-600">Dados criptografados e protegidos</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-center space-x-3 bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <Clock className="h-8 w-8 text-[#FF6B35]" />
-              <div className="text-left">
-                <p className="font-semibold text-gray-900">Fácil de usar</p>
-                <p className="text-sm text-gray-600">Comece em menos de 2 minutos</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-center space-x-3 bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <TrendingUp className="h-8 w-8 text-[#FF6B35]" />
-              <div className="text-left">
-                <p className="font-semibold text-gray-900">Resultados Reais</p>
-                <p className="text-sm text-gray-600">Usuários economizam até 30%</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="flex flex-col items-center text-center p-6">
+            <TrendingUp className="h-12 w-12 text-primary mb-4" />
+            <h3 className="text-lg font-semibold mb-2">Controle Total</h3>
+            <p className="text-muted-foreground">Acompanhe cada centavo e veja seu dinheiro crescer</p>
+          </div>
+          
+          <div className="flex flex-col items-center text-center p-6">
+            <Shield className="h-12 w-12 text-secondary mb-4" />
+            <h3 className="text-lg font-semibold mb-2">100% Seguro</h3>
+            <p className="text-muted-foreground">Seus dados protegidos com a melhor tecnologia</p>
+          </div>
+          
+          <div className="flex flex-col items-center text-center p-6">
+            <Smartphone className="h-12 w-12 text-accent mb-4" />
+            <h3 className="text-lg font-semibold mb-2">Sempre Disponível</h3>
+            <p className="text-muted-foreground">Acesse de qualquer lugar, a qualquer momento</p>
+          </div>
+        </motion.div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .bg-clip-text {
-            background: #D84315 !important;
-            -webkit-background-clip: unset !important;
-            -webkit-text-fill-color: #D84315 !important;
-            color: #D84315 !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
