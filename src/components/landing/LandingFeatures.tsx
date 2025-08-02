@@ -1,7 +1,13 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { BarChart3, Target, Calendar, PieChart, Wallet, TrendingUp } from 'lucide-react';
+import {
+  BarChart3,
+  Bot,
+  Target,
+  Smartphone,
+  Wallet,
+  TrendingUp
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const LandingFeatures = () => {
@@ -9,32 +15,32 @@ const LandingFeatures = () => {
     {
       icon: Wallet,
       title: "Controle de Transações",
-      description: "Registre receitas e despesas de forma rápida e organizada"
+      description: "Registre receitas e despesas de forma rápida e organizada com categorização automática"
+    },
+    {
+      icon: Bot,
+      title: "Assistente IA via WhatsApp",
+      description: "Interaja com sua conta financeira através do WhatsApp usando inteligência artificial"
+    },
+    {
+      icon: BarChart3,
+      title: "Relatórios Automatizados",
+      description: "Visualize seus dados com gráficos intuitivos e relatórios completos gerados automaticamente"
     },
     {
       icon: Target,
       title: "Metas Financeiras",
-      description: "Defina objetivos e acompanhe seu progresso em tempo real"
-    },
-    {
-      icon: BarChart3,
-      title: "Relatórios Detalhados",
-      description: "Visualize seus dados com gráficos intuitivos e relatórios completos"
-    },
-    {
-      icon: Calendar,
-      title: "Agendamento",
-      description: "Programe pagamentos recorrentes e nunca esqueça uma conta"
-    },
-    {
-      icon: PieChart,
-      title: "Análise por Categoria",
-      description: "Entenda onde seu dinheiro está sendo gasto"
+      description: "Defina objetivos e acompanhe seu progresso em tempo real com alertas inteligentes"
     },
     {
       icon: TrendingUp,
       title: "Dashboard Inteligente",
-      description: "Visão geral completa da sua situação financeira"
+      description: "Painel principal com métricas e insights que ajudam na tomada de decisões"
+    },
+    {
+      icon: Smartphone,
+      title: "Sistema de Assinaturas",
+      description: "Controle automático de assinaturas recorrentes com integração completa de pagamentos"
     }
   ];
 
@@ -55,8 +61,8 @@ const LandingFeatures = () => {
             Ferramentas poderosas e intuitivas para transformar a maneira como você lida com o dinheiro
           </p>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
