@@ -144,6 +144,22 @@ const LandingPricing = () => {
             </motion.div>
           ))}
         </motion.div>
+        
+        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-green-500" />
+            <span>Pagamento seguro via cartão de crédito</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-blue-400" />
+            <span>Cancele quando quiser</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-primary" />
+            <span>Dados 100% protegidos</span>
+          </div>
+        </div>
+        
       </div>
     </section>
   );
