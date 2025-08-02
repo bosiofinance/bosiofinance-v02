@@ -310,26 +310,29 @@ const RegisterPage = () => {
         {/* Logo e Título Centralizados */}
         <div className="flex flex-col items-center mb-8">
           {/* Logo */}
-          <div className="flex items-center space-x-2 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-              <img 
-                src={logoUrl} 
-                alt={logoAltText}
-                className="w-8 h-8 object-contain"
+          <div className="flex justify-center mb-4">
+            <div className="w-10 h-10 bg-transparent from-primary to-secondary rounded-lg flex items-center justify-center">
+              <img src="/logo-clara.png" alt="Logo clara" className="block dark:hidden h-10 sm:h-12 md:h-14 lg:h-16 xl:h-20 2xl:h-24 max-w-[260px] sm:max-w-[320px] md:max-w-[360px] object-contain" onError={e => {
+              const img = e.currentTarget;
+              img.style.display = 'none';
+              const fallback = img.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = 'flex';
+            }} />
+              <img
+                src="/logo-escura.png"
+                alt="Logo escura"
+                className="hidden dark:block h-10 sm:h-12 md:h-14 lg:h-16 xl:h-20 2xl:h-24 max-w-[260px] sm:max-w-[320px] md:max-w-[360px] object-contain"
                 onError={(e) => {
-                  const target = e.currentTarget as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextElementSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'block';
-                  }
-                }}
-              />
+                const img = e.currentTarget;
+                img.style.display = 'none';
+                const fallback = img.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
               <span className="text-white font-bold text-lg" style={{ display: 'none' }}>
                 {companyName.charAt(0)}
               </span>
             </div>
-            <span className="text-2xl font-bold text-primary">{companyName}</span>
           </div>
           <h1 className="text-3xl font-bold text-center text-foreground">Criar Conta</h1>
           <p className="text-muted-foreground text-center mt-2">
