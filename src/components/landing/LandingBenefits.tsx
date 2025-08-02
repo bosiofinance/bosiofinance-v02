@@ -71,6 +71,31 @@ const LandingBenefits = () => {
             </motion.div>
           ))}
         </motion.div>
+        {/* Sobre o Criador */}
+<div className="mt-16 max-w-5xl mx-auto">
+  <div className="flex flex-col md:flex-row items-center gap-6 bg-background border border-border rounded-xl shadow-md p-6 md:p-10">
+    <img
+      src="/logo-bosio-finance-foto.png" // coloque aqui o path correto da imagem no seu projeto
+      alt="Jhony Bosio"
+      className="w-28 h-28 rounded-full object-cover border-2 border-primary"
+    />
+    <div>
+      <h3 className="text-xl font-semibold text-primary mb-1">Sobre o Criador</h3>
+      <p className="text-base font-semibold mb-2">
+        Jhony Bosio - Assessor de Investimentos XP
+      </p>
+      <p className="text-muted-foreground mb-4">
+        Especialista em gestão de carteiras e educação financeira, com foco em crescimento de patrimônio e desenvolvimento de estratégias personalizadas. O Bosio Finance é sua porta de entrada para um ecossistema completo de soluções financeiras.
+      </p>
+      <ul className="text-sm space-y-1 text-primary">
+        <li>✓ Assessor de Investimentos certificado XP</li>
+        <li>✓ Especialista em crescimento patrimonial</li>
+        <li>✓ Desenvolvedor de soluções financeiras inovadoras</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
       </div>
     </section>
   );
