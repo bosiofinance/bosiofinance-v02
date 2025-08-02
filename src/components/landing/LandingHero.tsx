@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Clock3, TrendingUp } from 'lucide-react';
+import { TrendingUp, ShieldCheck, Clock3, ArrowRight, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useBrandingConfig } from '@/hooks/useBrandingConfig';
 
@@ -23,8 +23,9 @@ const LandingHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Badge superior */}
-          <div className="inline-flex items-center bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          {/* Badge com ícone à esquerda */}
+          <div className="inline-flex items-center bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+            <TrendingUp className="h-4 w-4 mr-2 stroke-white" />
             Liberdade Financeira ao Seu Alcance
           </div>
 
@@ -40,15 +41,17 @@ const LandingHero = () => {
             controla e faz seu patrimônio crescer de forma inteligente e automatizada.
           </p>
 
-          {/* Botões */}
+          {/* Botões com ícone */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button
               size="lg"
-              className="text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-5 md:px-8 md:py-6"
+              className="text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-5 md:px-8 md:py-6 flex items-center gap-2"
               onClick={scrollToPlans}
             >
               Quero começar agora mesmo
+              <ArrowRight className="h-4 w-4" />
             </Button>
+
             <Button
               size="lg"
               variant="outline"
