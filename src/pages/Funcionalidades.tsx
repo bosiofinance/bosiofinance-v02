@@ -82,11 +82,11 @@ const Funcionalidades = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link to="/" className="inline-flex items-center gap-2 text-[#0057FF] hover:text-[#0046CC] transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
             <ArrowLeftIcon className="w-5 h-5" />
             Voltar ao site
           </Link>
@@ -101,10 +101,10 @@ const Funcionalidades = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#1a1a1a]">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
             Funcionalidades do Bosio Finance
           </h1>
-          <p className="text-xl text-[#666] max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Conheça todas as ferramentas que vão transformar a maneira como você gerencia suas finanças pessoais
           </p>
         </motion.div>
@@ -113,23 +113,23 @@ const Funcionalidades = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="bg-white p-8 rounded-2xl border border-[#e1e8ff] shadow-sm hover:shadow-lg transition-all duration-300"
+              className="bg-background p-8 rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="w-14 h-14 bg-[#0057FF] rounded-2xl flex items-center justify-center mb-6">
+              <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center mb-6">
                 <feature.icon className="w-7 h-7 text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-[#1a1a1a]">{feature.title}</h3>
-              <p className="text-[#666] leading-relaxed">{feature.description}</p>
+              <h3 className="text-xl font-bold mb-4 text-foreground">{feature.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Call to Action */}
         <motion.div
-          className="text-center mt-16 bg-gradient-to-br from-[#0057FF] to-[#0046CC] rounded-2xl p-12"
+          className="text-center mt-16 bg-gradient-to-br from-primary to-primary/90 rounded-2xl p-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
@@ -137,12 +137,12 @@ const Funcionalidades = () => {
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
             Pronto para experimentar todas essas funcionalidades?
           </h2>
-          <p className="text-blue-100 mb-8 text-lg">
+          <p className="text-white/80 mb-8 text-lg">
             Comece hoje mesmo e transforme sua vida financeira
           </p>
           <Link
             to="/"
-            className="inline-block bg-white text-[#0057FF] hover:bg-gray-100 font-bold px-8 py-4 text-lg rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
+            className="inline-block bg-white text-primary hover:bg-muted font-bold px-8 py-4 text-lg rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
           >
             Ver Planos e Preços
           </Link>
