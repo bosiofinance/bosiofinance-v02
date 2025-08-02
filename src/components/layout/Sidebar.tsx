@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,9 +5,11 @@ import { cn } from '@/lib/utils';
 import { useAppContext } from '@/contexts/AppContext';
 import { usePreferences } from '@/contexts/PreferencesContext';
 import { useUserRole } from '@/hooks/useUserRole';
-import { useBrandingConfig } from '@/hooks/useBrandingConfig';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
-import { LayoutDashboard, Receipt, BarChart3, Target, User, Settings, FolderOpen, Calendar, Crown, LogOut, Shield } from 'lucide-react';
+import {
+  LayoutDashboard, Receipt, BarChart3, Target,
+  User, Settings, FolderOpen, Calendar, Crown, LogOut, Shield
+} from 'lucide-react';
 
 interface SidebarProps {
   onProfileClick?: () => void;
@@ -19,11 +20,10 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
   const { user, logout } = useAppContext();
   const { t } = usePreferences();
   const { isAdmin } = useUserRole();
-  const { companyName, logoUrl, logoAltText } = useBrandingConfig();
   const navigate = useNavigate();
   const location = useLocation();
-  
-  // Verificar se estamos na página de administração
+  const companyName = 'Minha Cifra';
+
   const isAdminPage = location.pathname === '/admin';
 
   const handleLogout = async () => {
@@ -39,28 +39,22 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
     }
   };
 
-  // Se for admin na página de admin, mostrar apenas menu administrativo
   if (isAdmin && isAdminPage) {
     const adminMenuItems = [
       {
         icon: Settings,
         label: 'Configurações',
         action: () => {
-          if (onConfigClick) {
-            onConfigClick();
-          }
+          if (onConfigClick) onConfigClick();
         }
       }
     ];
 
     return (
       <div className="hidden md:flex h-screen w-64 lg:w-64 xl:w-72 flex-col bg-background border-r">
-        {/* Logo/Header */}
         <div className="p-6 border-b">
           <h1 className="text-2xl font-bold text-primary">Admin Panel</h1>
         </div>
-
-        {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2">
           {adminMenuItems.map((item, index) => (
             <Button
@@ -73,8 +67,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
               {item.label}
             </Button>
           ))}
-          
-          {/* Botão Perfil que executa função ao invés de navegar */}
           <Button
             variant="ghost"
             className="w-full justify-start gap-3 px-4 py-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
@@ -84,8 +76,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
             Perfil
           </Button>
         </nav>
-
-        {/* Bottom Navigation - Theme Toggle e Logout */}
         <div className="p-4 border-t space-y-2">
           <div className="flex items-center justify-between px-4 py-3">
             <span className="text-sm text-muted-foreground">Tema</span>
@@ -104,107 +94,66 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
     );
   }
 
-  // Menu padrão para usuários normais
   const defaultMenuItems = [
-    {
-      icon: LayoutDashboard,
-      label: t('nav.dashboard'),
-      href: '/dashboard'
-    },
-    {
-      icon: Receipt,
-      label: t('nav.transactions'),
-      href: '/transactions'
-    },
-    {
-      icon: FolderOpen,
-      label: t('nav.categories'),
-      href: '/categories'
-    },
-    {
-      icon: Target,
-      label: t('nav.goals'),
-      href: '/goals'
-    },
-    {
-      icon: Calendar,
-      label: t('schedule.title'),
-      href: '/schedule'
-    },
-    {
-      icon: BarChart3,
-      label: t('nav.reports'),
-      href: '/reports'
-    },
-    {
-      icon: Crown,
-      label: t('nav.plans'),
-      href: '/plans'
-    },
+    { icon: LayoutDashboard, label: t('nav.dashboard'), href: '/dashboard' },
+    { icon: Receipt, label: t('nav.transactions'), href: '/transactions' },
+    { icon: FolderOpen, label: t('nav.categories'), href: '/categories' },
+    { icon: Target, label: t('nav.goals'), href: '/goals' },
+    { icon: Calendar, label: t('schedule.title'), href: '/schedule' },
+    { icon: BarChart3, label: t('nav.reports'), href: '/reports' },
+    { icon: Crown, label: t('nav.plans'), href: '/plans' }
   ];
 
-  // Adicionar item admin apenas se o usuário for admin e não estiver na página admin
-  let menuItems = [...defaultMenuItems];
   if (isAdmin && !isAdminPage) {
-    const adminMenuItem = {
-      icon: Shield,
-      label: 'Admin',
-      href: '/admin'
-    };
-    menuItems.push(adminMenuItem);
+    defaultMenuItems.push({ icon: Shield, label: 'Admin', href: '/admin' });
   }
 
   const bottomMenuItems = [
-    {
-      icon: User,
-      label: t('nav.profile'),
-      href: '/profile'
-    },
-    {
-      icon: Settings,
-      label: t('nav.settings'),
-      href: '/settings'
-    },
+    { icon: User, label: t('nav.profile'), href: '/profile' },
+    { icon: Settings, label: t('nav.settings'), href: '/settings' },
   ];
 
   if (!user) return null;
 
   return (
     <div className="hidden md:flex h-screen w-64 lg:w-64 xl:w-72 flex-col bg-background border-r overflow-hidden">
-      {/* Logo/Header */}
       <div className="p-6 border-b flex-shrink-0">
-        <div className="flex items-center space-x-3">
-          {logoUrl && (
-            <img 
-              src={logoUrl} 
-              alt={logoAltText}
-              className="h-8 w-8 object-contain"
-              onError={(e) => {
-                // Fallback para primeira letra do nome da empresa se a logo falhar
-                const target = e.currentTarget as HTMLImageElement;
-                target.style.display = 'none';
-                const nextSibling = target.nextElementSibling as HTMLElement;
-                if (nextSibling) {
-                  nextSibling.style.display = 'block';
-                }
-              }}
-            />
-          )}
-          {!logoUrl && (
-            <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">
-                {companyName.charAt(0)}
-              </span>
-            </div>
-          )}
-          <h1 className="text-xl font-bold text-primary">{companyName}</h1>
+        <div className="flex items-center justify-center">
+          <img
+            src="/logo-clara.png"
+            alt="Logo clara"
+            className="block dark:hidden h-10 sm:h-12 md:h-14 lg:h-16 xl:h-20 2xl:h-24 max-w-[260px] sm:max-w-[320px] md:max-w-[360px] object-contain"
+            onError={(e) => {
+              const img = e.currentTarget;
+              img.style.display = 'none';
+              const fallback = img.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = 'flex';
+            }}
+          />
+          <img
+            src="/logo-escura.png"
+            alt="Logo escura"
+            className="hidden dark:block h-10 sm:h-12 md:h-14 lg:h-16 xl:h-20 2xl:h-24 max-w-[260px] sm:max-w-[320px] md:max-w-[360px] object-contain"
+            onError={(e) => {
+              const img = e.currentTarget;
+              img.style.display = 'none';
+              const fallback = img.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = 'flex';
+            }}
+          />
+          <div
+            className="hidden h-10 w-10 bg-primary rounded-lg items-center justify-center"
+          >
+            <span className="text-primary-foreground font-bold text-sm">
+              {companyName.charAt(0)}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Navigation - Scrollable content */}
       <div className="flex-1 flex flex-col min-h-0">
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-          {menuItems.map((item) => (
+          {defaultMenuItems.map((item) => (
             <NavLink
               key={item.href}
               to={item.href}
@@ -212,9 +161,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
                 cn(
                   "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                   "hover:bg-accent hover:text-accent-foreground",
-                  isActive 
-                    ? "bg-primary text-primary-foreground" 
-                    : "text-muted-foreground"
+                  isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground"
                 )
               }
             >
@@ -224,7 +171,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
           ))}
         </nav>
 
-        {/* Bottom Navigation - Always visible */}
         <div className="p-4 border-t space-y-2 flex-shrink-0 bg-background">
           {bottomMenuItems.map((item) => (
             <NavLink
@@ -234,9 +180,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
                 cn(
                   "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                   "hover:bg-accent hover:text-accent-foreground",
-                  isActive 
-                    ? "bg-primary text-primary-foreground" 
-                    : "text-muted-foreground"
+                  isActive ? "bg-primary text-primary-foreground" : "text-muted-foreground"
                 )
               }
             >
@@ -244,14 +188,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onProfileClick, onConfigClick }) => {
               {item.label}
             </NavLink>
           ))}
-          
-          {/* Theme Toggle */}
+
           <div className="flex items-center justify-between px-4 py-3">
             <span className="text-sm text-muted-foreground">Tema</span>
             <ThemeToggle variant="ghost" size="sm" />
           </div>
-          
-          {/* Logout Button */}
+
           <Button
             variant="ghost"
             className="w-full justify-start gap-3 px-4 py-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
