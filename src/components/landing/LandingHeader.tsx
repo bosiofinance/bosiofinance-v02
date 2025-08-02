@@ -16,26 +16,23 @@ const LandingHeader = () => {
 
   return (
     <motion.header 
-      className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b shadow-sm w-full"
+      className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b shadow-sm w-full"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="w-full px-4 py-4 flex items-center justify-between max-w-none">
         <div className="flex items-center space-x-3">
-          <img 
-            src={logoUrl} 
-            alt={logoAltText}
-            className="h-16 object-contain" // Aumentado o tamanho e removido o container
-            onError={(e) => {
-              // Fallback para primeira letra do nome da empresa
-              const target = e.currentTarget as HTMLImageElement;
-              target.style.display = 'none';
-              const nextSibling = target.nextElementSibling as HTMLElement;
-              if (nextSibling) {
-                nextSibling.style.display = 'block';
-              }
-            }}
+          <img
+            src="/logo-clara.png"
+            alt="Logo modo claro"
+            className="h-16 object-contain dark:hidden"
+          />
+          {/* Logo modo escuro */}
+          <img
+            src="/logo-escura.png"
+            alt="Logo modo escuro"
+            className="h-16 object-contain hidden dark:block"
           />
           <span className="text-xl font-bold text-gray-900">{companyName}</span>
         </div>
