@@ -52,7 +52,7 @@ const LandingPricing = () => {
     originalPrice: config.prices.annual.displayOriginalPrice,
     savings: config.prices.annual.displaySavings,
     description: "Melhor custo-benefício",
-    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos", "Suporte VIP", "Backup automático", "Análises avançadas"],
+    features: ["Movimentos ilimitados", "Dashboard completo", "Todos os relatórios", "Metas ilimitadas", "Agendamentos", "Suporte prioritário", "Backup automático", "Análises avançadas"],
     limitations: [],
     buttonText: "Melhor Oferta",
     buttonVariant: "default" as const,
