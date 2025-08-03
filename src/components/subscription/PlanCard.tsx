@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { Check, Loader2, RefreshCw } from 'lucide-react';
 import { useSubscription } from '@/contexts/SubscriptionContext';
 import { usePreferences } from '@/contexts/PreferencesContext';
@@ -36,6 +37,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
   planType
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [promotionCode, setPromotionCode] = useState('');
   const { subscription, hasActiveSubscription, checkSubscription } = useSubscription();
   const { t } = usePreferences();
   const { toast } = useToast();
@@ -99,6 +101,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
         body: {
           planType,
           priceId,
+          promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(session.user.email)}`,
           cancelUrl: `${window.location.origin}/plans?canceled=true`,
           trialDays: 7
@@ -233,9 +236,18 @@ const PlanCard: React.FC<PlanCardProps> = ({
             </li>
           ))}
         </ul>
-        
-        <Button 
-          className="w-full" 
+        <div className="mb-4 space-y-2">
+          <label className="text-sm font-medium leading-none">Código promocional</label>
+          <Input
+            type="text"
+            placeholder="PROMO2024"
+            value={promotionCode}
+            onChange={(e) => setPromotionCode(e.target.value)}
+          />
+        </div>
+
+        <Button
+          className="w-full"
           size="lg"
           onClick={handleCheckout}
           disabled={isLoading || (isCurrentPlan && !isExpiredCurrentPlan)}
