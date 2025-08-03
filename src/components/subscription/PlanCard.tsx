@@ -98,11 +98,11 @@ const PlanCard: React.FC<PlanCardProps> = ({
       
       const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
       
-      // Invocar a função com o token explícito
+      // Invoca a edge function sem lidar com cupons no frontend;
+      // códigos promocionais são tratados diretamente no checkout da Stripe
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: {
           planType,
-          priceId,
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(session.user.email)}`,
           cancelUrl: `${window.location.origin}/plans?canceled=true`,
