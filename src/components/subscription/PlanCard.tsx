@@ -96,11 +96,12 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
       // Invocar a função com o token explícito
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-        body: { 
+        body: {
           planType,
           priceId,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(session.user.email)}`,
-          cancelUrl: `${window.location.origin}/plans?canceled=true`
+          cancelUrl: `${window.location.origin}/plans?canceled=true`,
+          trialDays: 7
         },
         headers: {
           Authorization: `Bearer ${session.access_token}`,
