@@ -44,8 +44,8 @@ serve(async (req) => {
     logStep("Function started");
 
     // Get request body
-    const { planType, successUrl, cancelUrl } = await req.json();
-    logStep("Received parameters", { planType, successUrl, cancelUrl });
+    const { planType, successUrl, cancelUrl, trialDays } = await req.json();
+    logStep("Received parameters", { planType, successUrl, cancelUrl, trialDays });
     
     // Verificar header de autorização
     const authHeader = req.headers.get("Authorization");
@@ -248,6 +248,7 @@ serve(async (req) => {
         metadata: {
           user_id: user.id,
         },
+        ...(trialDays ? { trial_period_days: trialDays } : {}),
       },
     });
     
