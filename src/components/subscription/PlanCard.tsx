@@ -95,7 +95,9 @@ const PlanCard: React.FC<PlanCardProps> = ({
 
       console.log('Usuário autenticado com sucesso');
       console.log('Token disponível:', !!session.access_token);
-
+      
+      const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
+      
       // Invocar a função com o token explícito
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: {
@@ -104,7 +106,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(session.user.email)}`,
           cancelUrl: `${window.location.origin}/plans?canceled=true`,
-          trialDays: 7
+          ...(couponCode ? { couponCode, trialDays: 7 } : {})
         },
         headers: {
           Authorization: `Bearer ${session.access_token}`,
