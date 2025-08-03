@@ -53,7 +53,6 @@ const CheckoutPage = () => {
         navigate('/login');
         return;
       }
-      const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
       
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: {
