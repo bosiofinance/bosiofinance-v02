@@ -44,8 +44,8 @@ serve(async (req) => {
     logStep("Function started");
 
     // Get request body
-    const { planType, successUrl, cancelUrl, promotionCode } = await req.json();
-    logStep("Received parameters", { planType, successUrl, cancelUrl, promotionCode });
+    const { planType, successUrl, cancelUrl, couponCode, trialDays } = await req.json();
+    logStep("Received parameters", { planType, successUrl, cancelUrl, couponCode, trialDays });
     
     // Verificar header de autorização
     const authHeader = req.headers.get("Authorization");
@@ -229,6 +229,21 @@ serve(async (req) => {
       logStep("Saved customer to database");
     }
     
+    // Validate coupon code and prepare discounts
+    let discounts;
+    if (couponCode) {
+      const promotionCodes = await stripe.promotionCodes.list({
+        code: couponCode,
+        active: true,
+        limit: 1,
+      });
+      const promo = promotionCodes.data[0];
+      if (!promo) {
+        throw new Error("Invalid coupon code");
+      }
+      discounts = [{ promotion_code: promo.id }];
+    }
+    
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
@@ -241,8 +256,7 @@ serve(async (req) => {
       mode: "subscription",
       success_url: successUrl,
       cancel_url: cancelUrl,
-      allow_promotion_codes: true,
-      ...(promotionCode ? { discounts: [{ promotion_code: promotionCode }] } : {}),
+      ...(discounts ? { discounts } : {}),
       metadata: {
         user_id: user.id,
       },
@@ -250,7 +264,7 @@ serve(async (req) => {
         metadata: {
           user_id: user.id,
         },
-        ...(trialDays ? { trial_period_days: trialDays } : {}),
+        ...(discounts ? { trial_period_days: trialDays || 7 } : {}),
       },
     });
     
