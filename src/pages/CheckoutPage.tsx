@@ -52,11 +52,12 @@ const CheckoutPage = () => {
       }
       
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-        body: { 
+        body: {
           planType,
           priceId, // Passando o priceId diretamente também
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(user.email || '')}`,
-          cancelUrl: `${window.location.origin}/checkout?canceled=true`
+          cancelUrl: `${window.location.origin}/checkout?canceled=true`,
+          trialDays: 7
         }
       });
 
