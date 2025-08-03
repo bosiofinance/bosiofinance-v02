@@ -7,14 +7,12 @@ import { Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 import { usePlanConfig } from '@/hooks/usePlanConfig';
-import { Input } from '@/components/ui/input';
 
 const CheckoutPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [promotionCode, setPromotionCode] = useState('');
   const { config, isLoading: configLoading } = usePlanConfig();
 
   const plan = searchParams.get('plan');
@@ -38,8 +36,7 @@ const CheckoutPage = () => {
     }
   }, [success, canceled, navigate, toast]);
   
-  const handleCheckout = async (planType: string) => {
-    
+  const handleCheckout = async (priceId: string, planType: string) => {
     try {
       setIsLoading(true);
       
@@ -53,14 +50,13 @@ const CheckoutPage = () => {
         navigate('/login');
         return;
       }
-      const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
       
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-        body: {
+        body: { 
           planType,
-          promotionCode: promotionCode || undefined,
+          priceId, // Passando o priceId diretamente também
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(user.email || '')}`,
-          cancelUrl: `${window.location.origin}/checkout?canceled=true`,
+          cancelUrl: `${window.location.origin}/checkout?canceled=true`
         }
       });
 
@@ -132,17 +128,7 @@ const CheckoutPage = () => {
           <h1 className="text-3xl font-bold mb-4">Escolha seu plano</h1>
           <p className="text-muted-foreground">Selecione o plano que melhor se adapta às suas necessidades</p>
         </div>
-        
-        <div className="mb-8 max-w-sm mx-auto space-y-2">
-          <label className="text-sm font-medium leading-none">Código promocional</label>
-          <Input
-            type="text"
-            placeholder="PROMO2024"
-            value={promotionCode}
-            onChange={(e) => setPromotionCode(e.target.value)}
-          />
-        </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {plans.map((planItem) => (
             <Card key={planItem.name} className={`relative ${planItem.popular ? 'border-primary shadow-xl' : ''}`}>
@@ -184,7 +170,7 @@ const CheckoutPage = () => {
                 <Button 
                   className="w-full" 
                   size="lg"
-                  onClick={() => handleCheckout(planItem.planType)}
+                  onClick={() => handleCheckout(planItem.priceId, planItem.planType)}
                   disabled={isLoading}
                 >
                   {isLoading ? (
