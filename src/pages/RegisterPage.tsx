@@ -242,7 +242,8 @@ const RegisterPage = () => {
         body: { 
           planType,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(validSession.user.email || '')}`,
-          cancelUrl: `${window.location.origin}/register?canceled=true`
+          cancelUrl: `${window.location.origin}/register?canceled=true`,
+          trialDays: 7
         },
         headers: {
           Authorization: `Bearer ${validSession.access_token}`,
