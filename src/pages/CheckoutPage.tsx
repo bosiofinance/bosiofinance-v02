@@ -38,7 +38,8 @@ const CheckoutPage = () => {
     }
   }, [success, canceled, navigate, toast]);
   
-  const handleCheckout = async (priceId: string, planType: string) => {
+  const handleCheckout = async (planType: string) => {
+    
     try {
       setIsLoading(true);
       
@@ -57,11 +58,9 @@ const CheckoutPage = () => {
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: {
           planType,
-          priceId, // Passando o priceId diretamente também
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(user.email || '')}`,
-           cancelUrl: `${window.location.origin}/checkout?canceled=true`,
-          ...(couponCode ? { couponCode, trialDays: 7 } : {})
+          cancelUrl: `${window.location.origin}/checkout?canceled=true`,
         }
       });
 
@@ -185,7 +184,7 @@ const CheckoutPage = () => {
                 <Button 
                   className="w-full" 
                   size="lg"
-                  onClick={() => handleCheckout(planItem.priceId, planItem.planType)}
+                  onClick={() => handleCheckout(planItem.planType)}
                   disabled={isLoading}
                 >
                   {isLoading ? (
