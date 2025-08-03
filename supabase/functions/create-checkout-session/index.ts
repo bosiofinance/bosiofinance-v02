@@ -256,7 +256,7 @@ serve(async (req) => {
       mode: "subscription",
       success_url: successUrl,
       cancel_url: cancelUrl,
-      ...(discounts ? { discounts } : {}),
+      allow_promotion_codes: true,
       metadata: {
         user_id: user.id,
       },
@@ -264,7 +264,7 @@ serve(async (req) => {
         metadata: {
           user_id: user.id,
         },
-        ...(discounts ? { trial_period_days: trialDays || 7 } : {}),
+        trial_period_days: 7,
       },
     });
     
