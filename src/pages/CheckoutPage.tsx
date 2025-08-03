@@ -60,7 +60,7 @@ const CheckoutPage = () => {
           priceId, // Passando o priceId diretamente também
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(user.email || '')}`,
-          cancelUrl: `${window.location.origin}/checkout?canceled=true`,
+           cancelUrl: `${window.location.origin}/checkout?canceled=true`,
           ...(couponCode ? { couponCode, trialDays: 7 } : {})
         }
       });
