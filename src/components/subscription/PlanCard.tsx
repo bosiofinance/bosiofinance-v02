@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,7 @@ import { usePreferences } from '@/contexts/PreferencesContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
+
 interface PlanCardProps {
   name: string;
   price: string;
@@ -21,6 +23,7 @@ interface PlanCardProps {
   popular?: boolean;
   planType: 'monthly' | 'annual';
 }
+
 const PlanCard: React.FC<PlanCardProps> = ({
   name,
   price,
@@ -35,55 +38,44 @@ const PlanCard: React.FC<PlanCardProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [promotionCode, setPromotionCode] = useState('');
-  const {
-    subscription,
-    hasActiveSubscription,
-    checkSubscription
-  } = useSubscription();
-  const {
-    t
-  } = usePreferences();
-  const {
-    toast
-  } = useToast();
+  const { subscription, hasActiveSubscription, checkSubscription } = useSubscription();
+  const { t } = usePreferences();
+  const { toast } = useToast();
   const navigate = useNavigate();
 
   // Verifica se é o plano atual e se está ativo
   const isCurrentPlan = subscription?.plan_type === planType && hasActiveSubscription;
-
+  
   // Verifica se é o plano atual mas está vencido (expirado)
   const isExpiredCurrentPlan = subscription?.plan_type === planType && !hasActiveSubscription;
-
+  
   // Verifica se pode fazer upgrade (está no plano mensal e visualizando o anual)
   const canUpgrade = subscription?.plan_type === 'monthly' && planType === 'annual' && hasActiveSubscription;
-
+  
   // Verifica se pode fazer downgrade (está no plano anual e visualizando o mensal)
   const canDowngrade = subscription?.plan_type === 'annual' && planType === 'monthly' && hasActiveSubscription;
+  
   const handleCheckout = async () => {
     try {
       setIsLoading(true);
-
+      
       // Verificar se o usuário está autenticado
-      const {
-        data: {
-          session
-        },
-        error: sessionError
-      } = await supabase.auth.getSession();
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       if (sessionError) {
         console.error('Erro ao obter sessão:', sessionError);
         toast({
           title: "Erro de autenticação",
           description: "Erro ao verificar sua sessão. Tente fazer login novamente.",
-          variant: "destructive"
+          variant: "destructive",
         });
         return;
       }
+
       if (!session?.user) {
         toast({
           title: "Login necessário",
           description: "Você precisa estar logado para fazer uma assinatura.",
-          variant: "destructive"
+          variant: "destructive",
         });
         // Redirecionar para página de registro com o priceId
         navigate(`/register?priceId=${priceId}`);
@@ -95,54 +87,58 @@ const PlanCard: React.FC<PlanCardProps> = ({
         toast({
           title: "Sessão inválida",
           description: "Sua sessão expirou. Faça login novamente.",
-          variant: "destructive"
+          variant: "destructive",
         });
         navigate('/login');
         return;
       }
+
       console.log('Usuário autenticado com sucesso');
       console.log('Token disponível:', !!session.access_token);
+      
       const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
-
+      
       // Invoca a edge function sem lidar com cupons no frontend;
       // códigos promocionais são tratados diretamente no checkout da Stripe
-      const {
-        data,
-        error
-      } = await supabase.functions.invoke('create-checkout-session', {
+      const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: {
           planType,
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(session.user.email)}`,
-          cancelUrl: `${window.location.origin}/plans?canceled=true`
+          cancelUrl: `${window.location.origin}/plans?canceled=true`,
         },
         headers: {
-          Authorization: `Bearer ${session.access_token}`
+          Authorization: `Bearer ${session.access_token}`,
         }
       });
+
       if (error) {
         console.error('Error creating checkout session:', error);
-
+        
         // Verificar se é erro de autenticação
-        if (error.message?.includes('Token de autenticação inválido') || error.message?.includes('User not authenticated') || error.message?.includes('invalid claim')) {
+        if (error.message?.includes('Token de autenticação inválido') || 
+            error.message?.includes('User not authenticated') ||
+            error.message?.includes('invalid claim')) {
           toast({
             title: "Sessão expirada",
             description: "Sua sessão expirou. Redirecionando para login...",
-            variant: "destructive"
+            variant: "destructive",
           });
           navigate('/login');
           return;
         }
+        
         toast({
           title: "Erro no checkout",
           description: `Erro: ${error.message}. Verifique se suas chaves do Stripe estão configuradas.`,
-          variant: "destructive"
+          variant: "destructive",
         });
         return;
       }
+
       if (data?.url) {
         console.log('Redirecting to Stripe checkout:', data.url);
-
+        
         // Redirecionar para Stripe na mesma aba
         window.location.href = data.url;
       } else {
@@ -153,51 +149,67 @@ const PlanCard: React.FC<PlanCardProps> = ({
       toast({
         title: "Erro no checkout",
         description: "Algo deu errado. Verifique suas configurações do Stripe.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
     }
   };
+
   const getButtonContent = () => {
     if (isCurrentPlan) {
-      return <>
+      return (
+        <>
           <Check className="mr-2 h-4 w-4" />
           {t('plans.current')}
-        </>;
+        </>
+      );
     }
+    
     if (isExpiredCurrentPlan) {
-      return <>
+      return (
+        <>
           <RefreshCw className="mr-2 h-4 w-4" />
           Renovar assinatura
-        </>;
+        </>
+      );
     }
+    
     if (canUpgrade) {
       return t('plans.upgradeToAnnual');
     }
+    
     if (canDowngrade) {
       return t('plans.downgrade');
     }
+    
     return hasActiveSubscription ? t('plans.upgrade') : t('plans.subscribe');
   };
+
   const getButtonVariant = () => {
     if (isCurrentPlan) return 'outline';
     if (isExpiredCurrentPlan) return 'default';
     if (canUpgrade) return 'default';
     return 'default';
   };
-  return <Card className={`relative ${popular ? 'border-primary shadow-xl' : ''} ${isCurrentPlan ? 'ring-2 ring-primary' : ''}`}>
-      {popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+
+  return (
+    <Card className={`relative ${popular ? 'border-primary shadow-xl' : ''} ${isCurrentPlan ? 'ring-2 ring-primary' : ''}`}>
+      {popular && (
+        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
           <div className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
             Mais Popular
           </div>
-        </div>}
+        </div>
+      )}
       
-      {isCurrentPlan && <div className="absolute -top-3 right-4">
+      {isCurrentPlan && (
+        <div className="absolute -top-3 right-4">
           <Badge variant="success" className="shadow-md">
             {t('plans.current')}
           </Badge>
-        </div>}
+        </div>
+      )}
       
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">{name}</CardTitle>
@@ -206,34 +218,60 @@ const PlanCard: React.FC<PlanCardProps> = ({
             <span className="text-4xl font-bold">{price}</span>
             <span className="text-muted-foreground">{period}</span>
           </div>
-          {originalPrice && <div className="mt-2">
+          {originalPrice && (
+            <div className="mt-2">
               <span className="text-sm text-muted-foreground line-through">{originalPrice}</span>
               <span className="ml-2 text-sm font-medium text-green-600">{savings}</span>
-            </div>}
+            </div>
+          )}
         </div>
         <p className="text-muted-foreground mt-2">{description}</p>
       </CardHeader>
       
       <CardContent>
         <ul className="space-y-3 mb-8">
-          {features.map((feature, idx) => <li key={idx} className="flex items-center gap-3">
+          {features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-3">
               <div className="h-2 w-2 bg-primary rounded-full"></div>
               <span className="text-sm">{feature}</span>
-            </li>)}
+            </li>
+          ))}
         </ul>
-        
+        <div className="mb-4 space-y-2">
+          <label className="text-sm font-medium leading-none">Código promocional</label>
+          <Input
+            type="text"
+            placeholder="PROMO2024"
+            value={promotionCode}
+            onChange={(e) => setPromotionCode(e.target.value)}
+          />
+        </div>
 
-        <Button className="w-full" size="lg" onClick={handleCheckout} disabled={isLoading || isCurrentPlan && !isExpiredCurrentPlan} variant={getButtonVariant()}>
-          {isLoading ? <>
+        <Button
+          className="w-full"
+          size="lg"
+          onClick={handleCheckout}
+          disabled={isLoading || (isCurrentPlan && !isExpiredCurrentPlan)}
+          variant={getButtonVariant()}
+        >
+          {isLoading ? (
+            <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Processando...
-            </> : getButtonContent()}
+            </>
+          ) : (
+            getButtonContent()
+          )}
         </Button>
 
-        {canUpgrade && <p className="text-center text-sm text-muted-foreground mt-2">
+        {canUpgrade && (
+          <p className="text-center text-sm text-muted-foreground mt-2">
             {t('plans.saveWithAnnual')}
-          </p>}
+          </p>
+        )}
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 export default PlanCard;
