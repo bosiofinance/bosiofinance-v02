@@ -106,7 +106,6 @@ const PlanCard: React.FC<PlanCardProps> = ({
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(session.user.email)}`,
           cancelUrl: `${window.location.origin}/plans?canceled=true`,
-          ...(couponCode ? { couponCode, trialDays: 7 } : {})
         },
         headers: {
           Authorization: `Bearer ${session.access_token}`,
