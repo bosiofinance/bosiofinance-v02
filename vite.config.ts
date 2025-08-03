@@ -50,12 +50,14 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    chunkSizeWarningLimit: 1024, // aumenta limite do aviso para 1MB
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            const pkgName = id.toString().split('node_modules/')[1].split('/')[0];
+            return pkgName;
+          }
         }
       }
     }
