@@ -52,6 +52,7 @@ const CheckoutPage = () => {
         navigate('/login');
         return;
       }
+      const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
       
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
         body: {
@@ -60,7 +61,7 @@ const CheckoutPage = () => {
           promotionCode: promotionCode || undefined,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(user.email || '')}`,
           cancelUrl: `${window.location.origin}/checkout?canceled=true`,
-          trialDays: 7
+          ...(couponCode ? { couponCode, trialDays: 7 } : {})
         }
       });
 
