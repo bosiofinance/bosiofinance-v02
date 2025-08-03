@@ -238,13 +238,11 @@ const RegisterPage = () => {
       
       // Chamar a Supabase Function para criar a sessão de checkout do Stripe
       console.log('Chamando create-checkout-session com sessão válida...');
-      const couponCode = window.prompt('Digite seu cupom de desconto (se tiver):')?.trim();
       const { data: functionData, error: functionError } = await supabase.functions.invoke('create-checkout-session', {
         body: { 
           planType,
           successUrl: `${window.location.origin}/payment-success?email=${encodeURIComponent(validSession.user.email || '')}`,
           cancelUrl: `${window.location.origin}/register?canceled=true`,
-          ...(couponCode ? { couponCode, trialDays: 7 } : {})
         },
         headers: {
           Authorization: `Bearer ${validSession.access_token}`,
