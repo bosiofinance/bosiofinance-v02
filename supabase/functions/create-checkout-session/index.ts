@@ -44,8 +44,8 @@ serve(async (req) => {
     logStep("Function started");
 
     // Get request body
-    const { planType, successUrl, cancelUrl, trialDays } = await req.json();
-    logStep("Received parameters", { planType, successUrl, cancelUrl, trialDays });
+    const { planType, successUrl, cancelUrl, promotionCode } = await req.json();
+    logStep("Received parameters", { planType, successUrl, cancelUrl, promotionCode });
     
     // Verificar header de autorização
     const authHeader = req.headers.get("Authorization");
@@ -241,6 +241,8 @@ serve(async (req) => {
       mode: "subscription",
       success_url: successUrl,
       cancel_url: cancelUrl,
+      allow_promotion_codes: true,
+      ...(promotionCode ? { discounts: [{ promotion_code: promotionCode }] } : {}),
       metadata: {
         user_id: user.id,
       },
