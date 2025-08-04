@@ -20,6 +20,13 @@ export async function handleInvoicePaymentFailed(
   
   console.log(`Updating subscription ${subscriptionId} to status: ${subscription.status} after payment failure`);
 
+  const normalizedStatus =
+    subscription.status === "trialing"
+      ? "active"
+      : ["incomplete", "incomplete_expired"].includes(subscription.status)
+        ? "inactive"
+        : subscription.status;
+  
   // Update subscription status to reflect failed payment
   const { error } = await supabase
     .from("poupeja_subscriptions")
