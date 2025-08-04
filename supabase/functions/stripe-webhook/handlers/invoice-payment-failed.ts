@@ -31,7 +31,7 @@ export async function handleInvoicePaymentFailed(
   const { error } = await supabase
     .from("poupeja_subscriptions")
     .update({
-      status: subscription.status, // Could be "past_due", "unpaid", etc.
+      status: normalizedStatus, // Could be "past_due", "unpaid", etc.
       current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
       current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
       cancel_at_period_end: subscription.cancel_at_period_end
@@ -43,5 +43,5 @@ export async function handleInvoicePaymentFailed(
     throw error;
   }
 
-  console.log(`Subscription ${subscriptionId} updated with failed payment status: ${subscription.status}`);
+  console.log(`Subscription ${subscriptionId} updated with failed payment status: ${normalizedStatus}`);
 }
