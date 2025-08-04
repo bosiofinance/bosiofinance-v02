@@ -20,11 +20,18 @@ export async function handleInvoicePaymentSucceeded(
   
   console.log(`Updating subscription ${subscriptionId} to status: ${subscription.status}`);
 
+  const normalizedStatus =
+    subscription.status === "trialing"
+      ? "active"
+      : ["incomplete", "incomplete_expired"].includes(subscription.status)
+        ? "inactive"
+        : subscription.status;
+  
   // Update subscription status to reflect successful payment
   const { error } = await supabase
     .from("poupeja_subscriptions")
     .update({
-      status: subscription.status, // Should be "active" after successful payment
+      status: normalizedStatus, // Should be "active" after successful payment
       current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
       current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
       cancel_at_period_end: subscription.cancel_at_period_end
@@ -36,5 +43,5 @@ export async function handleInvoicePaymentSucceeded(
     throw error;
   }
 
-  console.log(`Subscription ${subscriptionId} successfully updated after payment confirmation`);
+  console.log(`Subscription ${subscriptionId} successfully updated after payment confirmation to ${normalizedStatus}`);
 }
