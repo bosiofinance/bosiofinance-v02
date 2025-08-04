@@ -48,13 +48,21 @@ export async function handleSubscriptionUpdated(
     
     const verifiedUserId = poupejaUser.id;
     console.log(`Found and verified user for subscription ${subscription.id}`);
+
+    // Normalize Stripe status to supported values
+    const normalizedStatus =
+      subscription.status === "trialing"
+        ? "active"
+        : ["incomplete", "incomplete_expired"].includes(subscription.status)
+          ? "inactive"
+          : subscription.status;
     
     // Prepare update/insert data
     const subscriptionData: any = {
       user_id: verifiedUserId, // Use verified user ID
       stripe_customer_id: subscription.customer,
       stripe_subscription_id: subscription.id,
-      status: subscription.status,
+      status: normalizedStatus,
       cancel_at_period_end: subscription.cancel_at_period_end
     };
     
