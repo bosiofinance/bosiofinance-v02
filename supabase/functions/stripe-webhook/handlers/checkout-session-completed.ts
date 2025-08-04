@@ -67,14 +67,19 @@ export async function handleCheckoutSessionCompleted(
   console.log(`Processing subscription for price ID: ${priceId}, plan type: ${planType}`);
   console.log(`Subscription status from Stripe: ${subscription.status}`);
 
-  // Use actual subscription status from Stripe instead of assuming "active"
-  const subscriptionStatus = subscription.status; // This could be: incomplete, incomplete_expired, trialing, active, past_due, canceled, or unpaid
+  // Normalize unsupported Stripe statuses
+  const subscriptionStatus =
+    subscription.status === "trialing"
+      ? "active"
+      : ["incomplete", "incomplete_expired"].includes(subscription.status)
+        ? "inactive"
+        : subscription.status;
 
   await supabase.from("poupeja_subscriptions").upsert({
     user_id: userId,
     stripe_customer_id: session.customer,
     stripe_subscription_id: session.subscription,
-    status: subscriptionStatus, // Use actual status from Stripe
+    status: subscriptionStatus,
     plan_type: planType,
     current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
     current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
