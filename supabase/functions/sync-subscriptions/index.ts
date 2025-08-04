@@ -194,12 +194,20 @@ serve(async (req) => {
             }
           }
 
+          // Normalize unsupported Stripe statuses
+          const normalizedStatus =
+            subscription.status === 'trialing'
+              ? 'active'
+              : ['incomplete', 'incomplete_expired'].includes(subscription.status)
+                ? 'inactive'
+                : subscription.status;
+
           // Inserir/atualizar assinatura
           const subscriptionData = {
             user_id: userId,
             stripe_customer_id: customer.id,
             stripe_subscription_id: subscription.id,
-            status: subscription.status,
+            status: normalizedStatus,
             plan_type: planType,
             current_period_start: new Date(subscription.current_period_start * 1000).toISOString(),
             current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
