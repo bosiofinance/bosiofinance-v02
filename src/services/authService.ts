@@ -50,12 +50,12 @@ const validateEmail = (email: string): boolean => {
 };
 
 const validatePassword = (password: string): boolean => {
-  return password.length >= 8 && 
-         password.length <= 128 &&
-         /[A-Z]/.test(password) &&
-         /[a-z]/.test(password) &&
-         /[0-9]/.test(password) &&
-         /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+ // Supabase enforces a minimum of 6 characters for passwords. Previously our
+  // client side validation required a more complex password and minimum of 8
+  // characters, which prevented users with simple 6 character passwords created
+  // earlier from logging in. To match the backend behaviour we only enforce the
+  // length here.
+  return password.length >= 6 && password.length <= 128;
 };
 
 export const loginUser = async (email: string, password: string) => {
@@ -154,21 +154,25 @@ export const logoutUser = async () => {
 
 export const resetPassword = async (email: string) => {
   try {
-    // console.log("AuthService: Attempting password reset for:", email);
-    
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    // Sanitize and validate input similar to login and registration
+    const sanitizedEmail = sanitizeEmail(email);
+
+    if (!validateEmail(sanitizedEmail)) {
+      throw new Error('Email inválido');
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(sanitizedEmail, {
       redirectTo: `${window.location.origin}/reset-password`
     });
     
     if (error) {
-      console.error("AuthService: Password reset error:", error);
+      console.error('AuthService: Password reset error:', error);
       throw error;
     }
     
-    // console.log("AuthService: Password reset email sent for:", email);
     return true;
   } catch (error) {
-    console.error("AuthService: Password reset error:", error);
+    console.error('AuthService: Password reset error:', error);
     throw error;
   }
 };
