@@ -341,7 +341,19 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     if (!startDate || !endDate) return transactions;
     
     return transactions.filter(transaction => {
-      const transactionDate = new Date(transaction.date);
+      // Import createLocalDate function to avoid timezone issues
+      const createLocalDate = (dateString: string): Date => {
+        if (dateString.includes('-') && dateString.length === 10) {
+          // For YYYY-MM-DD format, create local date to avoid timezone conversion
+          const [year, month, day] = dateString.split('-').map(Number);
+          return new Date(year, month - 1, day); // month is 0-indexed
+        } else {
+          // For other formats, use normal Date constructor
+          return new Date(dateString);
+        }
+      };
+      
+      const transactionDate = createLocalDate(transaction.date);
       const transactionDateOnly = new Date(transactionDate.getFullYear(), transactionDate.getMonth(), transactionDate.getDate());
       return transactionDateOnly >= startDate && transactionDateOnly <= endDate;
     });
