@@ -120,7 +120,7 @@ export const registerUser = async (email: string, password: string, name?: strin
         data: {
           name: sanitizedName
         },
-        emailRedirectTo: ${window.location.origin}/
+        emailRedirectTo: `${window.location.origin}/`
       }
     });
     
