@@ -21,6 +21,7 @@ const Index = () => {
     filteredTransactions,
     transactions,
     setCustomDateRange,
+    setTimeRange,
     goals,
     hideValues,
     toggleHideValues,
@@ -73,8 +74,9 @@ const Index = () => {
     const firstDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
     const lastDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0, 23, 59, 59);
     setCustomDateRange(firstDay, lastDay);
+    setTimeRange('custom'); // Ensure time range is set to custom when month changes
     console.log("Dashboard: Date range updated for month:", currentMonth.toDateString());
-  }, [currentMonth, setCustomDateRange]);
+  }, [currentMonth, setCustomDateRange, setTimeRange]);
 
   // Removed auto-refresh to prevent performance issues
   // Data will be refreshed when user performs actions (add/edit/delete transactions)
@@ -87,6 +89,7 @@ const Index = () => {
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
     setCustomDateRange(firstDay, lastDay);
+    setTimeRange('custom'); // Ensure time range is set to custom when month changes
   };
   
   const handleAddTransaction = (type: 'income' | 'expense' = 'expense') => {
