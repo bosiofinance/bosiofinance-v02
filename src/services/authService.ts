@@ -29,12 +29,9 @@ const recordLoginAttempt = (email: string, success: boolean) => {
     attempts.lastAttempt = now;
     loginAttempts.set(email, attempts);
     
-    // Log failed attempt for security monitoring
-    console.warn('Failed login attempt:', {
-      email: email.substring(0, 3) + '***', // Partially obscured for privacy
-      timestamp: new Date().toISOString(),
-      attemptCount: attempts.count
-    });
+    // Security: Remove sensitive client-side logging
+    // In production, failed login attempts should be logged server-side only
+    // for security monitoring without exposing user information to the client
   }
 };
 
@@ -44,11 +41,21 @@ const sanitizeEmail = (email: string): string => {
 
 const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email) && email.length <= 254;
+  return emailRegex.test(email) && 
+         email.length <= 254 && 
+         !email.includes('..') && 
+         !email.startsWith('.') && 
+         !email.endsWith('.') &&
+         (email.match(/@/g) || []).length === 1;
 };
 
 const validatePassword = (password: string): boolean => {
-  return password.length >= 6 && password.length <= 128;
+  return password.length >= 8 && 
+         password.length <= 128 &&
+         /[A-Z]/.test(password) &&
+         /[a-z]/.test(password) &&
+         /[0-9]/.test(password) &&
+         /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
 };
 
 export const loginUser = async (email: string, password: string) => {
@@ -69,7 +76,7 @@ export const loginUser = async (email: string, password: string) => {
       throw new Error('Muitas tentativas de login. Tente novamente em 15 minutos.');
     }
     
-    console.log("AuthService: Attempting login for:", sanitizedEmail.substring(0, 3) + '***');
+    // Security: Remove sensitive client-side logging
     
     const { data, error } = await supabase.auth.signInWithPassword({
       email: sanitizedEmail,
@@ -78,12 +85,10 @@ export const loginUser = async (email: string, password: string) => {
     
     if (error) {
       recordLoginAttempt(sanitizedEmail, false);
-      console.error("AuthService: Login error:", error);
       throw error;
     }
     
     recordLoginAttempt(sanitizedEmail, true);
-    console.log("AuthService: Login successful");
     
     return data;
   } catch (error) {
@@ -106,7 +111,7 @@ export const registerUser = async (email: string, password: string, name?: strin
       throw new Error('Senha deve ter entre 6 e 128 caracteres');
     }
     
-    console.log("AuthService: Attempting registration for:", sanitizedEmail.substring(0, 3) + '***');
+    // Security: Remove sensitive client-side logging
     
     const { data, error } = await supabase.auth.signUp({
       email: sanitizedEmail,
@@ -115,16 +120,13 @@ export const registerUser = async (email: string, password: string, name?: strin
         data: {
           name: sanitizedName
         },
-        emailRedirectTo: `${window.location.origin}/`
+        emailRedirectTo: ${window.location.origin}/
       }
     });
     
     if (error) {
-      console.error("AuthService: Registration error:", error);
       throw error;
     }
-    
-    console.log("AuthService: Registration successful");
     return data;
   } catch (error) {
     console.error("AuthService: Registration error:", error);
@@ -155,7 +157,7 @@ export const resetPassword = async (email: string) => {
     // console.log("AuthService: Attempting password reset for:", email);
     
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`
+      redirectTo: ${window.location.origin}/reset-password
     });
     
     if (error) {
@@ -197,5 +199,5 @@ export const setupAuthListener = (callback: (session: any) => void) => {
     
     // Call the callback immediately without setTimeout for faster response
     callback(session);
-  });
+  });
 };
