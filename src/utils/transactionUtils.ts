@@ -44,7 +44,7 @@ export const filterTransactionsByTimeRange = (
 ): Transaction[] => {
   // Sort transactions by date (newest first)
   const sortedTransactions = [...transactions].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => createLocalDate(b.date).getTime() - createLocalDate(a.date).getTime()
   );
 
   const now = new Date();
@@ -54,7 +54,7 @@ export const filterTransactionsByTimeRange = (
     case 'today':
       const todayStart = getTodayStart();
       return sortedTransactions.filter(
-        (t) => new Date(t.date) >= todayStart && new Date(t.date) <= now
+        (t) => createLocalDate(t.date) >= todayStart && createLocalDate(t.date) <= now
       );
 
     case 'yesterday':
@@ -62,25 +62,25 @@ export const filterTransactionsByTimeRange = (
       const yesterdayEnd = new Date(yesterdayStart);
       yesterdayEnd.setHours(23, 59, 59, 999);
       return sortedTransactions.filter(
-        (t) => new Date(t.date) >= yesterdayStart && new Date(t.date) <= yesterdayEnd
+        (t) => createLocalDate(t.date) >= yesterdayStart && createLocalDate(t.date) <= yesterdayEnd
       );
 
     case '7days':
       const sevenDaysAgo = getDaysAgoStart(7);
       return sortedTransactions.filter(
-        (t) => new Date(t.date) >= sevenDaysAgo && new Date(t.date) <= now
+        (t) => createLocalDate(t.date) >= sevenDaysAgo && createLocalDate(t.date) <= now
       );
 
     case '14days':
       const fourteenDaysAgo = getDaysAgoStart(14);
       return sortedTransactions.filter(
-        (t) => new Date(t.date) >= fourteenDaysAgo && new Date(t.date) <= now
+        (t) => createLocalDate(t.date) >= fourteenDaysAgo && createLocalDate(t.date) <= now
       );
 
     case '30days':
       const thirtyDaysAgo = getDaysAgoStart(30);
       return sortedTransactions.filter(
-        (t) => new Date(t.date) >= thirtyDaysAgo && new Date(t.date) <= now
+        (t) => createLocalDate(t.date) >= thirtyDaysAgo && createLocalDate(t.date) <= now
       );
 
     case 'custom':
@@ -92,7 +92,7 @@ export const filterTransactionsByTimeRange = (
       const endDate = new Date(customEndDate);
       endDate.setHours(23, 59, 59, 999);
       return sortedTransactions.filter(
-        (t) => new Date(t.date) >= startDate && new Date(t.date) <= endDate
+        (t) => createLocalDate(t.date) >= startDate && createLocalDate(t.date) <= endDate
       );
 
     default:
@@ -134,7 +134,7 @@ export const calculateMonthlyFinancialData = (
   
   // Filter transactions for the selected month only
   const monthTransactions = allTransactions.filter(transaction => {
-    const transactionDate = new Date(transaction.date);
+    const transactionDate = createLocalDate(transaction.date);
     return transactionDate >= selectedMonthStart && transactionDate <= selectedMonthEnd;
   });
   
@@ -149,7 +149,7 @@ export const calculateMonthlyFinancialData = (
     // PREVIOUS MONTHS: Show balance of that specific month only
     // This represents the balance that was available at the end of that month
     const transactionsUpToSelectedMonth = allTransactions.filter(transaction => {
-      const transactionDate = new Date(transaction.date);
+      const transactionDate = createLocalDate(transaction.date);
       return transactionDate <= selectedMonthEnd;
     });
     accumulatedBalance = calculateTotalIncome(transactionsUpToSelectedMonth) - calculateTotalExpenses(transactionsUpToSelectedMonth);
@@ -159,7 +159,7 @@ export const calculateMonthlyFinancialData = (
     // CURRENT MONTH: Balance = all transactions up to current month (accumulated balance)
     const currentDateEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
     const transactionsUpToCurrent = allTransactions.filter(transaction => {
-      const transactionDate = new Date(transaction.date);
+      const transactionDate = createLocalDate(transaction.date);
       return transactionDate <= currentDateEnd;
     });
     accumulatedBalance = calculateTotalIncome(transactionsUpToCurrent) - calculateTotalExpenses(transactionsUpToCurrent);
@@ -170,7 +170,7 @@ export const calculateMonthlyFinancialData = (
     // No future transactions should be counted
     const currentDateEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
     const transactionsUpToCurrent = allTransactions.filter(transaction => {
-      const transactionDate = new Date(transaction.date);
+      const transactionDate = createLocalDate(transaction.date);
       return transactionDate <= currentDateEnd;
     });
     accumulatedBalance = calculateTotalIncome(transactionsUpToCurrent) - calculateTotalExpenses(transactionsUpToCurrent);
@@ -200,7 +200,7 @@ export const getTransactionsForMonth = (
   const monthEnd = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0, 23, 59, 59);
   
   return transactions.filter(transaction => {
-    const transactionDate = new Date(transaction.date);
+    const transactionDate = createLocalDate(transaction.date);
     return transactionDate >= monthStart && transactionDate <= monthEnd;
   });
 };
