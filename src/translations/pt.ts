@@ -1,5 +1,5 @@
 export default {
-  appName: "PoupeJá!",
+  appName: "Bosio Finance",
   common: {
     loading: 'Carregando...',
     error: 'Erro!',
