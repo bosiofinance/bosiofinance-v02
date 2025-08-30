@@ -45,14 +45,14 @@ export async function getPlanConfig() {
           monthly: {
             priceId: priceData.prices.monthly,
             price: settings.plan_price_monthly || '',
-            displayPrice: settings.plan_price_monthly || 'R$ -',
+            displayPrice: 'R$ 0,00 (100% gratuito)',
           },
           annual: {
             priceId: priceData.prices.annual,
             price: settings.plan_price_annual || '',
             originalPrice: settings.plan_price_monthly_equivalent || '',
             savings: settings.plan_discount_percentage || '',
-            displayPrice: settings.plan_price_annual || 'R$ -',
+            displayPrice: 'R$ 0,00 (pague quanto quiser)',
             displayOriginalPrice: settings.plan_price_monthly_equivalent || 'R$ -',
             displaySavings: `Economize ${settings.plan_discount_percentage || '-'}%`,
           }
